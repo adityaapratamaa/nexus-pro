@@ -995,7 +995,9 @@ async function analyze() {
   document.getElementById('resultSection').classList.remove('show');
   hideError();
 
-  const prompt = `Kamu adalah analis teknikal profesional level institutional dengan pengalaman 15 tahun di pasar forex, crypto, dan komoditas.
+  const prompt = `PENTING: Balas HANYA dengan raw JSON object. Jangan gunakan markdown, jangan tambah teks apapun di luar JSON.
+
+Kamu adalah analis teknikal profesional level institutional dengan pengalaman 15 tahun di pasar forex, crypto, dan komoditas.
 
 Analisis screenshot chart berikut secara SANGAT DETAIL dan PRESISI.
 
@@ -1079,7 +1081,15 @@ Jawab HANYA dalam format JSON berikut (tanpa teks lain, tanpa markdown fence):
 
     let json;
     try {
-      json = JSON.parse(raw.replace(/```json|```/g, '').trim());
+      // Strip markdown fences, extract JSON object
+      let cleaned = raw
+        .replace(/```json\s*/gi, '')
+        .replace(/```\s*/g, '')
+        .trim();
+      // Extract first { ... } block in case there's extra text
+      const jsonMatch = cleaned.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) throw new Error('No JSON found');
+      json = JSON.parse(jsonMatch[0]);
     } catch {
       throw new Error('Format AI tidak valid. Silakan coba lagi.');
     }

@@ -7,7 +7,6 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { imageBase64, prompt } = req.body;
-
   if (!imageBase64 || !prompt) {
     return res.status(400).json({ error: 'imageBase64 and prompt are required' });
   }
@@ -22,20 +21,14 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         contents: [{
           parts: [
-            {
-              inline_data: {
-                mime_type: 'image/jpeg',
-                data: imageBase64
-              }
-            },
-            {
-              text: prompt
-            }
+            { inline_data: { mime_type: 'image/jpeg', data: imageBase64 } },
+            { text: prompt }
           ]
         }],
         generationConfig: {
-          temperature: 0.2,
-          maxOutputTokens: 2048
+          temperature: 0.1,
+          maxOutputTokens: 2048,
+          responseMimeType: 'application/json'  // Force pure JSON output
         }
       })
     });
@@ -43,9 +36,9 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      const errMsg = data.error?.message || 'Gemini API error';
-      return res.status(response.status).json({ error: errMsg });
+      return res.status(response.status).json({ error: data.error?.message || 'Gemini API error' });
     }
+
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
     return res.status(200).json({ text });
 
