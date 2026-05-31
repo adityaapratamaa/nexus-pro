@@ -13,6 +13,11 @@ export default async function handler(req, res) {
 
   try {
     const apiKey = process.env.GEMINI_API_KEY;
+
+    if (!apiKey) {
+      return res.status(500).json({ error: 'GEMINI_API_KEY not set in environment variables' });
+    }
+
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
@@ -28,7 +33,7 @@ export default async function handler(req, res) {
         generationConfig: {
           temperature: 0.1,
           maxOutputTokens: 2048,
-          responseMimeType: 'application/json'  // Force pure JSON output
+          responseMimeType: 'application/json'
         }
       })
     });
@@ -36,11 +41,17 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      return res.status(response.status).json({ error: data.error?.message || 'Gemini API error' });
+      // Return full Gemini error detail
+      return res.status(response.status).json({
+        error: data.error?.message || 'Gemini API error',
+        detail: data
+      });
     }
 
     const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
-    return res.status(200).json({ text });
+
+    // Return raw text so frontend can debug
+    return res.status(200).json({ text, _raw_length: text.length });
 
   } catch (err) {
     return res.status(500).json({ error: err.message || 'Internal server error' });
