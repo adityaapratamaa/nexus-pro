@@ -3,45 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXUS PRO — Institutional Grade Market Analyzer</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>NEXUS — Chart Analyzer</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #03070e;
-  --bg2: #060c16;
-  --surface: #091220;
-  --surface2: #0c1828;
-  --surface3: #101f32;
-  --surface4: #152438;
-  --border: #162540;
-  --border2: #1f3455;
-  --border3: #2a4570;
+  --bg: #03070d;
+  --s1: #080f1c;
+  --s2: #0c1525;
+  --s3: #10192e;
+  --b1: #152035;
+  --b2: #1e3050;
+  --b3: #2a4570;
   --gold: #f0b429;
   --gold2: #ffd166;
-  --gold3: #ffe499;
   --cyan: #00d4ff;
-  --cyan2: #00a8cc;
   --green: #00e676;
-  --green2: #00b85a;
   --red: #ff3d57;
-  --red2: #cc1f38;
   --orange: #ff9100;
   --purple: #c084fc;
-  --purple2: #9333ea;
-  --pink: #f472b6;
-  --blue: #3b82f6;
   --text: #e8f0fe;
-  --text2: #8bafd4;
-  --text3: #5a7fa8;
+  --text2: #7aa3cc;
   --muted: #2d4a6e;
   --mono: 'IBM Plex Mono', monospace;
   --display: 'Bebas Neue', sans-serif;
   --body: 'DM Sans', sans-serif;
-  --alt: 'Space Grotesk', sans-serif;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 
 body {
   background: var(--bg);
@@ -51,90 +40,67 @@ body {
   overflow-x: hidden;
 }
 
-/* === ANIMATED BG === */
 body::before {
-  content: '';
-  position: fixed; inset: 0;
+  content:'';
+  position:fixed; inset:0;
   background:
-    radial-gradient(ellipse 70% 40% at 50% -10%, rgba(0,212,255,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 30% 30% at 95% 90%, rgba(240,180,41,0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 25% 25% at 5% 70%, rgba(192,132,252,0.04) 0%, transparent 50%);
-  pointer-events: none; z-index: 0;
-  animation: bgPulse 8s ease-in-out infinite alternate;
-}
-
-@keyframes bgPulse {
-  from { opacity: 0.7; }
-  to { opacity: 1; }
+    radial-gradient(ellipse 80% 40% at 50% -5%, rgba(0,212,255,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 30% 30% at 95% 95%, rgba(240,180,41,0.05) 0%, transparent 50%);
+  pointer-events:none; z-index:0;
 }
 
 body::after {
-  content: '';
-  position: fixed; inset: 0;
+  content:'';
+  position:fixed; inset:0;
   background-image:
-    linear-gradient(rgba(0,212,255,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,212,255,0.018) 1px, transparent 1px);
-  background-size: 60px 60px;
-  pointer-events: none; z-index: 0;
+    linear-gradient(rgba(0,212,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.02) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none; z-index:0;
 }
 
 .wrap {
-  max-width: 1060px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 28px 18px 80px;
-  position: relative; z-index: 1;
+  padding: 32px 18px 80px;
+  position: relative; z-index:1;
 }
 
-/* === HEADER === */
-.nexus-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: flex-start;
-  margin-bottom: 28px;
-  gap: 20px;
+/* ── HEADER ── */
+header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
-
-
-.logo-eyebrow {
+.logo-eye {
   font-family: var(--mono);
   font-size: 9px;
   color: var(--cyan);
   letter-spacing: 5px;
   text-transform: uppercase;
-  margin-bottom: 4px;
-  display: flex; align-items: center; gap: 10px;
-  opacity: 0.8;
+  margin-bottom: 5px;
+  display: flex; align-items: center; gap: 8px;
 }
-
-.logo-eyebrow::before {
-  content: '';
-  width: 24px; height: 1px;
-  background: linear-gradient(90deg, var(--cyan), transparent);
+.logo-eye::before {
+  content:'';
+  width:20px; height:1px;
+  background: var(--cyan);
   box-shadow: 0 0 8px var(--cyan);
 }
 
-.logo-title {
+h1 {
   font-family: var(--display);
-  font-size: clamp(52px, 9vw, 80px);
-  letter-spacing: 6px;
+  font-size: clamp(48px, 9vw, 72px);
+  letter-spacing: 5px;
   line-height: 0.9;
-  background: linear-gradient(135deg, #ffffff 0%, var(--cyan) 40%, var(--gold) 80%, #ffffff 100%);
+  background: linear-gradient(135deg, #fff 0%, var(--cyan) 45%, var(--gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 40px rgba(0,212,255,0.15));
-}
-
-.logo-pro {
-  display: inline-block;
-  background: linear-gradient(135deg, var(--gold), var(--gold2));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-family: var(--display);
-  font-size: clamp(52px, 9vw, 80px);
-  letter-spacing: 6px;
 }
 
 .logo-sub {
@@ -142,2956 +108,961 @@ body::after {
   font-size: 10px;
   color: var(--muted);
   letter-spacing: 2px;
-  margin-top: 8px;
-  display: flex; gap: 16px; flex-wrap: wrap;
+  margin-top: 6px;
 }
 
-.logo-sub span { color: var(--text3); }
-
-.header-right {
-  display: flex; flex-direction: column; align-items: flex-end; gap: 10px;
-}
-
-.hstats-row { display: flex; gap: 10px; }
-
-.hstat {
-  text-align: right;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  position: relative; overflow: hidden;
-}
-
-.hstat::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-}
-
-.hstat-val {
-  font-family: var(--mono);
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--cyan);
-  line-height: 1;
-}
-
-.hstat-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  color: var(--muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-top: 3px;
-}
-
-.status-pill {
+.header-badge {
   display: flex; align-items: center; gap: 6px;
   background: rgba(0,230,118,0.08);
   border: 1px solid rgba(0,230,118,0.2);
   border-radius: 20px;
-  padding: 5px 12px;
+  padding: 6px 14px;
   font-family: var(--mono);
   font-size: 9px;
   color: var(--green);
   letter-spacing: 2px;
 }
-
-.pulse-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
+.badge-dot {
+  width:6px; height:6px;
+  border-radius:50%;
   background: var(--green);
+  box-shadow: 0 0 8px var(--green);
   animation: pulse 2s infinite;
 }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-@keyframes pulse {
-  0%,100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
-}
-
-/* === STEP TABS === */
-.steps-nav {
-  display: flex; gap: 3px;
-  margin-bottom: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 5px;
-  overflow-x: auto;
-}
-
-.step-tab {
-  flex: 1; min-width: 100px;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 10px;
-  cursor: pointer;
-  transition: all 0.25s;
+/* ── UPLOAD ZONE ── */
+.upload-zone {
+  border: 2px dashed var(--b2);
+  border-radius: 16px;
+  background: var(--s1);
+  padding: 48px 24px;
   text-align: center;
-  color: var(--muted);
-  position: relative;
-}
-
-.step-tab:hover { background: var(--surface2); color: var(--text3); }
-
-.step-tab.active {
-  background: linear-gradient(135deg, rgba(0,212,255,0.12), rgba(240,180,41,0.08));
-  border: 1px solid var(--border2);
-  color: var(--text);
-}
-
-.step-tab.done::after {
-  content: '✓';
-  position: absolute; top: 3px; right: 5px;
-  font-size: 8px; color: var(--green);
-}
-
-.step-num {
-  font-family: var(--mono);
-  font-size: 8px;
-  display: block;
-  margin-bottom: 3px;
-  color: var(--cyan);
-  opacity: 0.5;
-  letter-spacing: 2px;
-}
-
-.step-tab.active .step-num { opacity: 1; }
-
-.step-icon { display: block; font-size: 14px; margin-bottom: 2px; }
-
-.step-label {
-  font-family: var(--alt);
-  font-size: 11px;
-  font-weight: 600;
-  display: block;
-  letter-spacing: 0.3px;
-}
-
-/* === PANELS === */
-.panel { display: none; animation: panelIn 0.3s ease; }
-.panel.active { display: block; }
-
-@keyframes panelIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* === CARDS === */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  margin-bottom: 20px;
 }
 
-.card-accent-top {
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.3), transparent);
+.upload-zone::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 60% 40% at 50% 50%, rgba(0,212,255,0.04), transparent);
+  opacity:0;
+  transition: opacity 0.3s;
 }
 
-.card-title {
+.upload-zone:hover, .upload-zone.drag {
+  border-color: var(--cyan);
+  background: var(--s2);
+}
+.upload-zone:hover::before, .upload-zone.drag::before { opacity:1; }
+
+.upload-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  display: block;
+  filter: grayscale(0.3);
+}
+
+.upload-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.upload-hint {
+  font-size: 12px;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+
+.upload-hint span { color: var(--cyan); }
+
+#fileInput { display:none; }
+
+/* preview inside zone */
+.preview-wrap {
+  display: none;
+  position: relative;
+}
+.preview-wrap.show { display: block; }
+
+#previewImg {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 10px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid var(--b2);
+}
+
+.preview-overlay {
+  position: absolute;
+  top: 8px; right: 8px;
+  display: flex; gap: 8px;
+}
+
+.btn-icon {
+  background: var(--s3);
+  border: 1px solid var(--b2);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: var(--text2);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--mono);
+}
+.btn-icon:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* ── ASSET & TF ROW ── */
+.meta-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.meta-group { display: flex; flex-direction: column; gap: 6px; }
+
+.meta-label {
   font-family: var(--mono);
   font-size: 9px;
-  color: var(--cyan);
+  color: var(--muted);
   letter-spacing: 3px;
   text-transform: uppercase;
-  margin-bottom: 16px;
-  display: flex; align-items: center; gap: 8px;
 }
 
-.card-title::after {
-  content: '';
-  flex: 1; height: 1px;
-  background: linear-gradient(90deg, var(--border2), transparent);
-}
-
-/* === 2-COL GRID === */
-.grid-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-}
-
-@media (max-width: 640px) {
-  .grid-2, .grid-3 { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 760px) {
-  .grid-3 { grid-template-columns: 1fr 1fr; }
-}
-
-/* === INFLUENCER CHIPS === */
-.inf-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-  gap: 8px;
-  margin-bottom: 18px;
-}
-
-.inf-chip {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex; align-items: center; gap: 10px;
-}
-
-.inf-chip:hover { border-color: var(--border2); background: var(--surface3); }
-
-.inf-chip.active {
-  border-color: var(--cyan);
-  background: rgba(0,212,255,0.07);
-  box-shadow: 0 0 20px rgba(0,212,255,0.08);
-}
-
-.inf-avatar {
-  width: 34px; height: 34px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  background: var(--surface3);
-  border: 1px solid var(--border2);
-  flex-shrink: 0;
-}
-
-.inf-chip.active .inf-avatar { border-color: var(--cyan); }
-
-.inf-handle {
-  font-family: var(--mono);
-  font-size: 11px;
-  color: var(--text);
-  font-weight: 600;
-}
-
-.inf-power {
-  font-family: var(--mono);
-  font-size: 8px;
-  color: var(--muted);
-  margin-top: 2px;
-  letter-spacing: 0.5px;
-}
-
-.inf-chip.active .inf-power { color: var(--cyan); }
-
-/* Custom influencer row */
-.custom-inf-row {
-  display: flex; gap: 8px; align-items: center; margin-top: 10px;
-}
-
-.custom-inf-row input {
-  flex: 1;
-}
-
-/* === FORM ELEMENTS === */
-textarea {
-  width: 100%;
-  background: var(--surface2);
-  border: 1px solid var(--border);
+.meta-input, .meta-select {
+  background: var(--s1);
+  border: 1px solid var(--b1);
   border-radius: 8px;
+  padding: 10px 14px;
   color: var(--text);
   font-family: var(--mono);
   font-size: 13px;
-  line-height: 1.7;
-  padding: 14px 16px;
-  resize: vertical;
-  min-height: 110px;
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-textarea:focus {
-  border-color: var(--cyan);
-  box-shadow: 0 0 0 3px rgba(0,212,255,0.07);
-}
-
-textarea::placeholder { color: var(--muted); }
-
-select, input[type=number], input[type=text], input[type=range] {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  font-family: var(--mono);
-  font-size: 12px;
-  padding: 10px 14px;
+  transition: border-color 0.2s;
   outline: none;
   width: 100%;
-  transition: border-color 0.2s, box-shadow 0.2s;
-  appearance: none;
   -webkit-appearance: none;
+  appearance: none;
 }
+.meta-input:focus, .meta-select:focus { border-color: var(--cyan); }
+.meta-select option { background: var(--s2); }
 
-select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232d4a6e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 32px;
-  cursor: pointer;
-}
-
-select:focus, input[type=number]:focus, input[type=text]:focus {
-  border-color: var(--cyan);
-  box-shadow: 0 0 0 3px rgba(0,212,255,0.07);
-}
-
-select option { background: var(--surface2); }
-input[type=number]::placeholder, input[type=text]::placeholder { color: var(--muted); }
-input[type=number]::-webkit-inner-spin-button { display: none; }
-
-.field-group { display: flex; flex-direction: column; gap: 6px; }
-
-.field-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--text3);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-/* Segment buttons */
-.seg-group {
-  display: flex; gap: 3px;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 3px;
-}
-
-.seg-btn {
-  flex: 1;
-  background: transparent; border: none;
-  border-radius: 5px;
-  padding: 8px 6px;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-  letter-spacing: 0.3px;
-}
-
-.seg-btn:hover { color: var(--text3); }
-
-.seg-btn.active {
-  background: var(--surface3);
-  border: 1px solid var(--border2);
-  color: var(--text);
-}
-
-.seg-btn.up.active { color: var(--green); border-color: rgba(0,230,118,0.3); background: rgba(0,230,118,0.07); }
-.seg-btn.down.active { color: var(--red); border-color: rgba(255,61,87,0.3); background: rgba(255,61,87,0.07); }
-.seg-btn.side.active { color: var(--orange); border-color: rgba(255,145,0,0.3); background: rgba(255,145,0,0.07); }
-
-/* === CHART UPLOAD === */
-.chart-upload-zone {
-  border: 2px dashed var(--border2);
+/* ── ANALYZE BUTTON ── */
+.btn-analyze {
+  width: 100%;
+  background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(240,180,41,0.1));
+  border: 1px solid var(--b3);
   border-radius: 12px;
-  padding: 28px 20px;
-  text-align: center;
+  padding: 16px;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.25s;
-  background: var(--surface2);
+  transition: all 0.3s;
   position: relative;
   overflow: hidden;
+  margin-bottom: 28px;
 }
 
-.chart-upload-zone:hover, .chart-upload-zone.drag-over {
-  border-color: var(--cyan);
-  background: rgba(0,212,255,0.04);
-  box-shadow: 0 0 30px rgba(0,212,255,0.06);
+.btn-analyze::before {
+  content:'';
+  position:absolute; top:0; left:-100%; width:100%; height:100%;
+  background: linear-gradient(90deg, transparent, rgba(0,212,255,0.1), transparent);
+  transition: left 0.5s;
 }
+.btn-analyze:hover::before { left:100%; }
+.btn-analyze:hover { border-color: var(--cyan); box-shadow: 0 0 30px rgba(0,212,255,0.1); }
+.btn-analyze:disabled { opacity:0.5; cursor:not-allowed; }
 
-.chart-upload-icon { font-size: 32px; margin-bottom: 10px; }
-
-.chart-upload-title {
-  font-family: var(--alt);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text2);
-  margin-bottom: 4px;
-}
-
-.chart-upload-sub {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-  letter-spacing: 1px;
-}
-
-.chart-upload-zone input[type=file] {
-  position: absolute; inset: 0;
-  opacity: 0; cursor: pointer;
-  width: 100%; height: 100%;
-  padding: 0;
-  border: none;
-  background: none;
-}
-
-#chartPreview {
-  display: none;
-  margin-top: 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border2);
-  max-height: 200px;
-  width: 100%;
-  object-fit: contain;
-}
-
-.chart-mode-tabs {
-  display: flex; gap: 6px; margin-bottom: 14px;
-}
-
-.chart-mode-tab {
-  flex: 1;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  padding: 8px;
-  text-align: center;
-  cursor: pointer;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-  transition: all 0.2s;
-  letter-spacing: 1px;
-}
-
-.chart-mode-tab.active {
-  border-color: var(--cyan);
-  background: rgba(0,212,255,0.08);
-  color: var(--cyan);
-}
-
-.chart-mode-content { display: none; }
-.chart-mode-content.active { display: block; }
-
-/* === PATTERN GRID === */
-.pattern-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
-  gap: 7px;
-}
-
-.pattern-chip {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 10px;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-}
-
-.pattern-chip:hover { border-color: var(--border2); background: var(--surface3); }
-
-.pattern-chip.selected {
-  border-color: var(--gold);
-  background: rgba(240,180,41,0.08);
-  box-shadow: 0 0 12px rgba(240,180,41,0.1);
-}
-
-.pattern-icon { font-size: 18px; display: block; margin-bottom: 3px; }
-.pattern-name {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--text2);
-  letter-spacing: 0.3px;
-  line-height: 1.3;
-}
-
-.pattern-chip.selected .pattern-name { color: var(--gold2); }
-
-.pattern-signal {
-  font-family: var(--mono);
-  font-size: 8px;
-  margin-top: 3px;
-  padding: 1px 6px;
-  border-radius: 3px;
-  display: inline-block;
-  letter-spacing: 0.5px;
-}
-
-.bull { background: rgba(0,230,118,0.12); color: var(--green); }
-.bear { background: rgba(255,61,87,0.12); color: var(--red); }
-.neut { background: rgba(255,145,0,0.12); color: var(--orange); }
-
-/* === MARKET STRUCTURE === */
-.struct-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.struct-chip {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px 14px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.struct-chip:hover { border-color: var(--border2); }
-.struct-chip.active { border-color: var(--purple); background: rgba(192,132,252,0.08); }
-
-.struct-title {
-  font-family: var(--mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 3px;
-}
-
-.struct-chip.active .struct-title { color: var(--purple); }
-
-.struct-desc {
-  font-size: 11px;
-  color: var(--muted);
-  line-height: 1.4;
-}
-
-/* MTF Grid */
-.mtf-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-}
-
-@media (max-width: 580px) { .mtf-grid { grid-template-columns: 1fr; } }
-
-.mtf-card {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-}
-
-.mtf-tf {
-  font-family: var(--display);
-  font-size: 22px;
-  letter-spacing: 2px;
-  color: var(--cyan);
-  margin-bottom: 10px;
-  line-height: 1;
-}
-
-/* Price levels */
-.price-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
-  margin-top: 12px;
-}
-
-@media (max-width: 500px) { .price-row { grid-template-columns: 1fr 1fr; } }
-
-.price-field { display: flex; flex-direction: column; gap: 5px; }
-
-.price-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  color: var(--muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-/* === BUTTONS === */
-.btn-row {
-  display: flex; gap: 10px;
-  justify-content: flex-end;
-  margin-top: 18px; flex-wrap: wrap;
-}
-
-.btn {
-  border: none;
-  border-radius: 8px;
-  padding: 11px 22px;
-  font-family: var(--alt);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.3px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex; align-items: center; gap: 8px;
-  position: relative; overflow: hidden;
-}
-
-.btn::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: rgba(255,255,255,0);
-  transition: background 0.15s;
-}
-
-.btn:hover::after { background: rgba(255,255,255,0.05); }
-
-.btn-primary {
-  background: linear-gradient(135deg, var(--cyan), #0088bb);
-  color: #000;
-  box-shadow: 0 4px 16px rgba(0,212,255,0.2);
-}
-
-.btn-primary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0,212,255,0.3);
-}
-
-.btn-gold {
-  background: linear-gradient(135deg, var(--gold), #b07800);
-  color: #000;
-  box-shadow: 0 4px 16px rgba(240,180,41,0.2);
-}
-
-.btn-gold:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(240,180,41,0.35);
-}
-
-.btn-purple {
-  background: linear-gradient(135deg, var(--purple), #7e22ce);
-  color: #fff;
-}
-
-.btn-purple:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(192,132,252,0.3); }
-
-.btn-ghost {
-  background: var(--surface2);
-  border: 1px solid var(--border2);
-  color: var(--text3);
-}
-
-.btn-ghost:hover { background: var(--surface3); color: var(--text); }
-
-.btn-danger {
-  background: rgba(255,61,87,0.1);
-  border: 1px solid rgba(255,61,87,0.3);
-  color: var(--red);
-}
-
-.btn-danger:hover { background: rgba(255,61,87,0.2); }
-
-.btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-
-/* === LOADING === */
-.loading-bar { display: none; margin: 14px 0; }
-.loading-bar.show { display: block; }
-
-.loading-track {
+/* ── LOADING ── */
+.loading-bar {
   height: 2px;
-  background: var(--surface3);
+  background: var(--b1);
   border-radius: 2px;
+  margin-bottom: 24px;
   overflow: hidden;
-  margin-bottom: 10px;
+  display: none;
 }
-
+.loading-bar.show { display: block; }
 .loading-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--cyan), var(--gold), var(--purple), var(--cyan));
-  background-size: 200% 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--gold));
   border-radius: 2px;
-  animation: loadSlide 1.8s ease-in-out infinite, shimmer 2s linear infinite;
-  width: 60%; margin-left: -60%;
+  width: 0%;
+  transition: width 0.4s ease;
+  animation: loadPulse 1.5s ease-in-out infinite;
 }
-
-@keyframes loadSlide {
-  0% { margin-left: -60%; }
-  100% { margin-left: 100%; }
-}
-
-@keyframes shimmer {
-  0% { background-position: 0% 0; }
-  100% { background-position: 200% 0; }
+@keyframes loadPulse {
+  0% { width: 5%; }
+  50% { width: 75%; }
+  100% { width: 90%; }
 }
 
 .loading-text {
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--cyan);
-  letter-spacing: 2px;
-  display: flex; align-items: center; gap: 8px;
-}
-
-.loading-dot { animation: blink 0.8s infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-
-/* === ERROR === */
-.error-box {
-  background: rgba(255,61,87,0.07);
-  border: 1px solid rgba(255,61,87,0.2);
-  border-radius: 8px;
-  padding: 14px 16px;
+  text-align: center;
   font-family: var(--mono);
   font-size: 11px;
-  color: rgba(255,153,153,0.9);
-  display: none; margin-top: 10px;
-  line-height: 1.6;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+  display: none;
+  animation: blink 1.2s infinite;
 }
+.loading-text.show { display: block; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
+/* ── ERROR ── */
+.error-box {
+  background: rgba(255,61,87,0.08);
+  border: 1px solid rgba(255,61,87,0.3);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--red);
+  margin-bottom: 20px;
+  display: none;
+}
 .error-box.show { display: block; }
 
-/* === RESULT: HERO === */
-.result-hero {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  overflow: hidden;
-  margin-bottom: 14px;
-  position: relative;
+/* ── RESULT SECTION ── */
+#resultSection { display:none; animation: fadeUp 0.5s ease; }
+#resultSection.show { display:block; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(20px); }
+  to { opacity:1; transform: translateY(0); }
 }
 
-.result-hero::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+/* ── SIGNAL HERO ── */
+.signal-hero {
+  background: var(--s1);
+  border: 1px solid var(--b2);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.signal-hero::before {
+  content:'';
+  position:absolute; top:0; left:0; right:0; height:2px;
   background: linear-gradient(90deg, transparent, var(--cyan), var(--gold), transparent);
 }
 
-.result-hero-top {
-  padding: 22px;
-  background: linear-gradient(135deg, rgba(0,212,255,0.04), rgba(240,180,41,0.025));
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px; flex-wrap: wrap;
-}
-
-.signal-main { display: flex; align-items: center; gap: 18px; }
-
-.signal-icon {
-  width: 68px; height: 68px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 30px; flex-shrink: 0;
-}
-
-.signal-icon.strong-buy { background: rgba(0,230,118,0.12); border: 2px solid rgba(0,230,118,0.35); box-shadow: 0 0 30px rgba(0,230,118,0.15); }
-.signal-icon.buy { background: rgba(0,212,255,0.1); border: 2px solid rgba(0,212,255,0.3); box-shadow: 0 0 20px rgba(0,212,255,0.1); }
-.signal-icon.wait { background: rgba(255,145,0,0.1); border: 2px solid rgba(255,145,0,0.3); }
-.signal-icon.avoid { background: rgba(255,61,87,0.1); border: 2px solid rgba(255,61,87,0.3); box-shadow: 0 0 20px rgba(255,61,87,0.1); }
-.signal-icon.neutral { background: rgba(139,175,212,0.1); border: 2px solid rgba(139,175,212,0.3); }
-
-.signal-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  color: var(--muted);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-}
-
-.signal-value {
+.signal-badge {
   font-family: var(--display);
-  font-size: clamp(30px, 5vw, 44px);
+  font-size: 42px;
   letter-spacing: 3px;
   line-height: 1;
+  padding: 12px 20px;
+  border-radius: 12px;
+  text-align: center;
 }
+.signal-badge.strong-buy { color: var(--green); background: rgba(0,230,118,0.1); border: 1px solid rgba(0,230,118,0.3); }
+.signal-badge.buy { color: var(--cyan); background: rgba(0,212,255,0.1); border: 1px solid rgba(0,212,255,0.3); }
+.signal-badge.wait { color: var(--orange); background: rgba(255,145,0,0.1); border: 1px solid rgba(255,145,0,0.3); }
+.signal-badge.sell { color: var(--red); background: rgba(255,61,87,0.1); border: 1px solid rgba(255,61,87,0.3); }
+.signal-badge.strong-sell { color: var(--red); background: rgba(255,61,87,0.15); border: 1px solid rgba(255,61,87,0.4); }
 
-.signal-value.strong-buy { color: var(--green); text-shadow: 0 0 30px rgba(0,230,118,0.4); }
-.signal-value.buy { color: var(--cyan); text-shadow: 0 0 20px rgba(0,212,255,0.35); }
-.signal-value.wait { color: var(--orange); }
-.signal-value.avoid { color: var(--red); text-shadow: 0 0 20px rgba(255,61,87,0.35); }
-.signal-value.neutral { color: var(--text2); }
-
-.signal-subtitle { font-size: 12px; color: var(--text2); margin-top: 6px; line-height: 1.4; }
-
-/* Score ring */
-.score-ring-svg { display: block; }
-
-.score-ring-val {
+.signal-asset {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  margin-bottom: 4px;
+}
+.signal-trend {
   font-family: var(--display);
-  font-size: 30px;
-  fill: var(--text);
-  dominant-baseline: middle;
-  text-anchor: middle;
-}
-
-.score-ring-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  fill: var(--muted);
-  dominant-baseline: middle;
-  text-anchor: middle;
+  font-size: 28px;
   letter-spacing: 2px;
-  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.signal-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.5;
 }
 
-/* Score bars */
-.score-breakdown {
+.signal-score-wrap { text-align: center; }
+.score-ring-svg { width: 90px; height: 90px; }
+.score-ring-bg { fill:none; stroke: var(--b2); stroke-width:6; }
+.score-ring-fill { fill:none; stroke-width:6; stroke-linecap:round; stroke-dasharray:251.2; stroke-dashoffset:251.2; transform:rotate(-90deg); transform-origin:50% 50%; transition: stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1), stroke 0.5s; }
+.score-ring-text { font-family:var(--mono); font-size:18px; font-weight:700; fill: var(--text); }
+.score-ring-label { font-family:var(--mono); font-size:7px; fill: var(--muted); letter-spacing:1px; }
+
+/* ── GRID CARDS ── */
+.cards-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  padding: 18px 22px;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
-@media (max-width: 600px) { .score-breakdown { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 380px) { .score-breakdown { grid-template-columns: 1fr; } }
-
-
-.score-item-label {
-  font-family: var(--mono);
-  font-size: 8px;
-  color: var(--muted);
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 7px;
-}
-
-.score-bar-wrap { display: flex; align-items: center; gap: 8px; }
-
-.score-bar-bg {
-  flex: 1; height: 5px;
-  background: var(--surface3);
-  border-radius: 3px;
+.card {
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 14px;
+  padding: 18px;
+  position: relative;
   overflow: hidden;
 }
 
-.score-bar-fill {
-  height: 100%;
-  border-radius: 3px;
-  transition: width 1.4s cubic-bezier(0.4, 0, 0.2, 1);
-  width: 0%;
-}
+.card.full { grid-column: 1 / -1; }
 
-.score-num {
-  font-family: var(--mono);
-  font-size: 13px;
-  font-weight: 700;
-  min-width: 26px;
-  text-align: right;
-}
-
-/* === SENTIMENT GAUGE === */
-.gauge-wrap {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 16px 0 8px;
-}
-
-.gauge-svg { overflow: visible; }
-
-.gauge-needle {
-  transform-origin: 100px 90px;
-  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.gauge-val {
-  font-family: var(--display);
-  font-size: 28px;
-  fill: var(--text);
-  text-anchor: middle;
-  dominant-baseline: middle;
-}
-
-.gauge-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  fill: var(--muted);
-  text-anchor: middle;
-  letter-spacing: 2px;
-}
-
-/* === ASSET CARDS === */
-.asset-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.asset-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
-  position: relative; overflow: hidden;
-  transition: border-color 0.2s, transform 0.2s;
-}
-
-.asset-item:hover { transform: translateY(-1px); border-color: var(--border2); }
-
-.asset-item::before {
-  content: '';
-  position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-}
-
-.asset-item.up::before { background: linear-gradient(90deg, var(--green), transparent); }
-.asset-item.down::before { background: linear-gradient(90deg, var(--red), transparent); }
-.asset-item.neutral::before { background: linear-gradient(90deg, var(--orange), transparent); }
-
-.asset-sym { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.asset-impact-val { font-family: var(--display); font-size: 20px; letter-spacing: 1px; margin-bottom: 4px; }
-.asset-impact-val.up { color: var(--green); }
-.asset-impact-val.down { color: var(--red); }
-.asset-impact-val.neutral { color: var(--orange); }
-.asset-reason { font-size: 10px; color: var(--text2); line-height: 1.4; }
-.asset-conf { font-family: var(--mono); font-size: 8px; color: var(--muted); margin-top: 6px; letter-spacing: 1px; }
-
-/* === ANALYSIS GRID === */
-.analysis-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px; margin-bottom: 14px;
-}
-
-@media (max-width: 640px) { .analysis-grid { grid-template-columns: 1fr; } }
-
-.analysis-box {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 16px;
-}
-
-.analysis-box-title {
-  font-family: var(--mono);
-  font-size: 8px;
-  color: var(--muted);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-
-.analysis-box p { font-size: 12px; line-height: 1.7; color: var(--text2); }
-
-/* === RISK === */
-.risk-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
-
-.risk-bg {
-  flex: 1; height: 7px;
-  background: var(--surface3);
-  border-radius: 4px; overflow: hidden;
-}
-
-.risk-fill { height: 100%; border-radius: 4px; transition: width 1.3s ease; }
-.risk-score { font-family: var(--mono); font-size: 12px; font-weight: 700; min-width: 36px; text-align: right; }
-
-/* === STRATEGY BOX === */
-.strategy-box {
-  background: linear-gradient(135deg, rgba(0,212,255,0.04), rgba(240,180,41,0.03));
-  border: 1px solid var(--border2);
-  border-radius: 12px;
-  padding: 18px;
-  margin-bottom: 14px;
-}
-
-.strategy-title {
+.card-head {
   font-family: var(--mono);
   font-size: 9px;
   color: var(--cyan);
   letter-spacing: 3px;
   text-transform: uppercase;
   margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.card-head::after {
+  content:'';
+  flex:1; height:1px;
+  background: linear-gradient(90deg, var(--b2), transparent);
 }
 
-.strategy-grid {
+/* ── ENTRY STRATEGY ── */
+.strat-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
-.strat-label { font-family: var(--mono); font-size: 8px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 4px; }
-.strat-val { font-family: var(--mono); font-size: 14px; font-weight: 700; line-height: 1.3; }
+.strat-item {
+  background: var(--s2);
+  border: 1px solid var(--b1);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.strat-label {
+  font-family: var(--mono);
+  font-size: 8px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.strat-val {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+}
 .strat-val.entry { color: var(--cyan); }
 .strat-val.tp { color: var(--green); }
 .strat-val.sl { color: var(--red); }
 .strat-val.rr { color: var(--gold); }
 
-/* === CHECKLIST === */
-.checklist { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
-
-.check-item {
-  display: flex; align-items: center; gap: 10px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+/* ── LEVELS ── */
+.levels-list { display: flex; flex-direction: column; gap: 8px; }
+.level-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--s2);
   border-radius: 8px;
-  padding: 9px 14px;
-  transition: border-color 0.2s;
+  padding: 10px 12px;
+}
+.level-type {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  width: 70px;
+  flex-shrink:0;
+}
+.level-type.r { color: var(--red); }
+.level-type.s { color: var(--green); }
+.level-bar-wrap {
+  flex:1;
+  height: 4px;
+  background: var(--b1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.level-bar {
+  height: 100%;
+  border-radius: 4px;
+  width: 0%;
+  transition: width 1s ease;
+}
+.level-bar.r { background: linear-gradient(90deg, var(--red), rgba(255,61,87,0.3)); }
+.level-bar.s { background: linear-gradient(90deg, var(--green), rgba(0,230,118,0.3)); }
+.level-price {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  min-width: 80px;
+  text-align: right;
+}
+.level-strength {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  min-width: 40px;
+  text-align: right;
 }
 
-.check-item:hover { border-color: var(--border2); }
+/* ── PATTERN TAGS ── */
+.pattern-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.ptag {
+  background: var(--s2);
+  border: 1px solid var(--b2);
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.ptag.bull { color: var(--green); border-color: rgba(0,230,118,0.3); }
+.ptag.bear { color: var(--red); border-color: rgba(255,61,87,0.3); }
+.ptag.neutral { color: var(--gold); border-color: rgba(240,180,41,0.3); }
 
+/* ── MOMENTUM GAUGES ── */
+.gauge-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.gauge-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  display: flex; justify-content: space-between;
+}
+.gauge-label span { color: var(--text2); }
+
+.gauge-track {
+  height: 6px;
+  background: var(--b1);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+.gauge-fill {
+  height: 100%;
+  border-radius: 6px;
+  width: 0%;
+  transition: width 1.2s cubic-bezier(.4,0,.2,1);
+}
+.gauge-note {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+}
+
+/* ── MARKET STRUCTURE ── */
+.struct-tags { display: flex; flex-wrap:wrap; gap:8px; margin-bottom: 12px; }
+.stag {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+.stag.bos { background: rgba(0,212,255,0.1); color: var(--cyan); border:1px solid rgba(0,212,255,0.3); }
+.stag.choch { background: rgba(240,180,41,0.1); color: var(--gold); border:1px solid rgba(240,180,41,0.3); }
+.stag.hh { background: rgba(0,230,118,0.1); color: var(--green); border:1px solid rgba(0,230,118,0.3); }
+.stag.ll { background: rgba(255,61,87,0.1); color: var(--red); border:1px solid rgba(255,61,87,0.3); }
+.stag.hl { background: rgba(0,230,118,0.08); color: var(--green); border:1px solid rgba(0,230,118,0.2); }
+.stag.lh { background: rgba(255,61,87,0.08); color: var(--red); border:1px solid rgba(255,61,87,0.2); }
+
+.struct-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+
+/* ── NARRATIVE ── */
+.narrative-text {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--text2);
+  border-left: 2px solid var(--cyan);
+  padding-left: 16px;
+}
+
+/* ── RISK METER ── */
+.risk-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+.risk-num {
+  font-family: var(--display);
+  font-size: 42px;
+  line-height: 1;
+  min-width: 60px;
+}
+.risk-info { flex:1; }
+.risk-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  margin-bottom: 6px;
+}
+.risk-track {
+  height: 6px;
+  background: var(--b1);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.risk-fill {
+  height:100%;
+  border-radius:6px;
+  width:0%;
+  transition: width 1.2s ease;
+}
+
+/* ── CHECKLIST ── */
+.checklist { display: flex; flex-direction: column; gap: 8px; }
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--s2);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
 .check-icon {
   width: 20px; height: 20px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 10px; flex-shrink: 0;
+  font-size: 10px;
   font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.check-icon.pass { background: rgba(0,230,118,0.15); color: var(--green); }
+.check-icon.warn { background: rgba(255,145,0,0.15); color: var(--orange); }
+.check-icon.fail { background: rgba(255,61,87,0.15); color: var(--red); }
+.check-text { font-size: 12px; color: var(--text2); line-height: 1.5; }
+.check-text strong { color: var(--text); }
+
+/* ── HISTORY ── */
+.hist-section {
+  margin-top: 36px;
 }
 
-.check-icon.pass { background: rgba(0,230,118,0.12); color: var(--green); border: 1px solid rgba(0,230,118,0.3); }
-.check-icon.fail { background: rgba(255,61,87,0.1); color: var(--red); border: 1px solid rgba(255,61,87,0.25); }
-.check-icon.warn { background: rgba(255,145,0,0.1); color: var(--orange); border: 1px solid rgba(255,145,0,0.25); }
-
-.check-text { font-size: 12px; color: var(--text2); flex: 1; line-height: 1.4; }
-.check-text strong { color: var(--text); font-weight: 600; }
-
-/* === MTF RESULT === */
-.mtf-result-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 10px;
+.hist-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 14px;
 }
 
-@media (max-width: 580px) { .mtf-result-grid { grid-template-columns: 1fr; } }
-
-.mtf-result-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 14px;
+.hist-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
-.mtf-result-tf { font-family: var(--display); font-size: 22px; color: var(--cyan); margin-bottom: 8px; }
-.mtf-result-trend { font-family: var(--mono); font-size: 10px; font-weight: 700; margin-bottom: 4px; }
-.mtf-result-desc { font-size: 11px; color: var(--text2); line-height: 1.4; }
-
-/* === MARKET STRUCTURE RESULT === */
-.struct-result-item {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  display: flex; align-items: flex-start; gap: 10px;
-  margin-bottom: 8px;
-}
-
-.struct-result-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
-.struct-result-label { font-family: var(--mono); font-size: 10px; font-weight: 700; color: var(--purple); margin-bottom: 3px; }
-.struct-result-desc { font-size: 12px; color: var(--text2); line-height: 1.4; }
-
-/* === NARRATIVE === */
-.narrative-box {
-  background: linear-gradient(135deg, rgba(0,212,255,0.03), rgba(192,132,252,0.03));
-  border: 1px solid var(--border2);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 14px;
-  position: relative; overflow: hidden;
-}
-
-.narrative-box::before {
-  content: '"';
-  position: absolute; top: -10px; left: 14px;
-  font-family: var(--display);
-  font-size: 80px;
-  color: rgba(0,212,255,0.06);
-  line-height: 1;
-  pointer-events: none;
-}
-
-.narrative-text { font-size: 13px; line-height: 1.9; color: var(--text2); position: relative; z-index: 1; }
-
-/* === DISCLAIMER === */
-.disclaimer {
-  background: rgba(255,61,87,0.04);
-  border: 1px solid rgba(255,61,87,0.15);
-  border-radius: 10px;
-  padding: 14px 16px;
+.btn-clear {
+  background: transparent;
+  border: 1px solid var(--b2);
+  border-radius: 6px;
+  padding: 5px 12px;
+  color: var(--muted);
   font-family: var(--mono);
   font-size: 9px;
-  color: rgba(255,153,153,0.7);
-  line-height: 1.8; letter-spacing: 0.2px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
+.btn-clear:hover { border-color: var(--red); color: var(--red); }
 
-.disclaimer strong { color: var(--red); display: block; margin-bottom: 4px; letter-spacing: 2px; font-size: 10px; }
-
-/* === HISTORY === */
-.history-wrap { margin-top: 28px; }
-
-.history-hdr {
-  display: flex; justify-content: space-between; align-items: center;
-  margin-bottom: 10px;
-}
-
-.history-hdr-title { font-family: var(--mono); font-size: 9px; color: var(--muted); letter-spacing: 3px; text-transform: uppercase; }
+.hist-list { display: flex; flex-direction: column; gap: 8px; }
 
 .hist-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  display: flex; justify-content: space-between; align-items: center;
-  gap: 12px; cursor: pointer;
-  transition: border-color 0.2s; flex-wrap: wrap;
-  margin-bottom: 5px;
-}
-
-.hist-item:hover { border-color: var(--border2); }
-
-.hist-tweet { font-family: var(--mono); font-size: 10px; color: var(--muted); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-.hist-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-
-.hist-signal { font-family: var(--mono); font-size: 8px; padding: 2px 7px; border-radius: 3px; letter-spacing: 1px; font-weight: 700; }
-.hist-signal.strong-buy { background: rgba(0,230,118,0.12); color: var(--green); }
-.hist-signal.buy { background: rgba(0,212,255,0.1); color: var(--cyan); }
-.hist-signal.wait { background: rgba(255,145,0,0.1); color: var(--orange); }
-.hist-signal.avoid { background: rgba(255,61,87,0.1); color: var(--red); }
-.hist-time { font-family: var(--mono); font-size: 9px; color: var(--muted); opacity: 0.5; }
-
-/* === TABS === */
-.sub-tabs {
-  display: flex; gap: 4px; margin-bottom: 16px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0;
-}
-
-.sub-tab {
-  background: none; border: none;
-  border-bottom: 2px solid transparent;
-  padding: 8px 14px;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
+  background: var(--s1);
+  border: 1px solid var(--b1);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
   cursor: pointer;
   transition: all 0.2s;
+}
+.hist-item:hover { border-color: var(--b3); background: var(--s2); }
+
+.hist-sig {
+  font-family: var(--display);
+  font-size: 14px;
   letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: -1px;
+  min-width: 90px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-align: center;
 }
+.hist-sig.strong-buy, .hist-sig.buy { color: var(--green); background: rgba(0,230,118,0.1); }
+.hist-sig.wait { color: var(--orange); background: rgba(255,145,0,0.1); }
+.hist-sig.sell, .hist-sig.strong-sell { color: var(--red); background: rgba(255,61,87,0.1); }
 
-.sub-tab:hover { color: var(--text3); }
-.sub-tab.active { color: var(--cyan); border-bottom-color: var(--cyan); }
-
-.sub-content { display: none; }
-.sub-content.active { display: block; }
-
-/* === ASSET CHECKBOXES === */
-.asset-checks {
-  display: flex; gap: 10px; flex-wrap: wrap;
-}
-
-.asset-chk-label {
-  display: flex; align-items: center; gap: 7px;
-  cursor: pointer;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  padding: 7px 12px;
+.hist-meta { flex:1; }
+.hist-asset {
   font-family: var(--mono);
   font-size: 11px;
-  color: var(--text2);
-  transition: all 0.2s;
-  user-select: none;
+  color: var(--cyan);
+  margin-bottom: 2px;
 }
-
-.asset-chk-label:hover { border-color: var(--border2); color: var(--text); }
-
-.asset-chk-label input:checked + span { color: var(--gold2); }
-
-input[type=checkbox] {
-  accent-color: var(--gold);
-  width: 14px; height: 14px;
-}
-
-/* === TAGS FOR STRUCTURE === */
-.tag {
-  display: inline-flex; align-items: center; gap: 5px;
-  padding: 3px 10px;
-  border-radius: 4px;
+.hist-time {
   font-family: var(--mono);
   font-size: 9px;
-  letter-spacing: 1px;
-  font-weight: 600;
+  color: var(--muted);
 }
 
-.tag-bos { background: rgba(0,212,255,0.12); color: var(--cyan); border: 1px solid rgba(0,212,255,0.25); }
-.tag-choch { background: rgba(192,132,252,0.12); color: var(--purple); border: 1px solid rgba(192,132,252,0.25); }
-.tag-hh { background: rgba(0,230,118,0.1); color: var(--green); border: 1px solid rgba(0,230,118,0.2); }
-.tag-ll { background: rgba(255,61,87,0.1); color: var(--red); border: 1px solid rgba(255,61,87,0.2); }
-
-/* === EXPORT BTN === */
-.export-row {
-  display: flex; gap: 10px; justify-content: center;
-  margin-top: 20px; flex-wrap: wrap;
-}
-
-/* === IMAGE ANALYSIS MODE indicator === */
-.ai-vision-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(192,132,252,0.1);
-  border: 1px solid rgba(192,132,252,0.3);
-  border-radius: 20px;
-  padding: 4px 12px;
+.hist-score {
   font-family: var(--mono);
-  font-size: 9px;
-  color: var(--purple);
-  letter-spacing: 1.5px;
-  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gold);
 }
 
-/* === TOOLTIP === */
-.tooltip-wrap { position: relative; display: inline-block; }
-.tooltip-wrap .tooltip-text {
-  visibility: hidden; opacity: 0;
-  background: var(--surface3);
-  border: 1px solid var(--border2);
-  color: var(--text2);
-  text-align: center;
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-family: var(--mono);
-  font-size: 9px;
-  position: absolute; z-index: 10;
-  bottom: 125%; left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  transition: opacity 0.2s;
-  pointer-events: none;
-}
-
-.tooltip-wrap:hover .tooltip-text { visibility: visible; opacity: 1; }
-
-/* === DIVIDER === */
+/* ── DIVIDER ── */
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border2), transparent);
-  margin: 14px 0;
+  background: linear-gradient(90deg, transparent, var(--b2), transparent);
+  margin: 24px 0;
 }
 
-/* === PROGRESS STEPS === */
-.progress-steps {
-  display: flex; align-items: center; margin-bottom: 20px;
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .strat-grid { grid-template-columns: 1fr 1fr; }
+  .gauge-row { grid-template-columns: 1fr; }
+  .meta-row { grid-template-columns: 1fr 1fr; }
+  .meta-row .btn-analyze { grid-column: 1/-1; }
+  .signal-hero { grid-template-columns: 1fr; text-align:center; }
+  .signal-score-wrap { display:flex; justify-content:center; }
 }
-
-.prog-step {
-  display: flex; flex-direction: column; align-items: center;
-  flex: 1;
-}
-
-.prog-circle {
-  width: 28px; height: 28px;
-  border-radius: 50%;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono);
-  font-size: 10px;
-  color: var(--muted);
-  margin-bottom: 4px;
-  transition: all 0.3s;
-}
-
-.prog-circle.active { border-color: var(--cyan); color: var(--cyan); background: rgba(0,212,255,0.08); }
-.prog-circle.done { border-color: var(--green); color: var(--green); background: rgba(0,230,118,0.08); }
-
-.prog-label { font-family: var(--mono); font-size: 8px; color: var(--muted); text-align: center; letter-spacing: 0.5px; }
-.prog-circle.active + .prog-label { color: var(--cyan); }
-.prog-circle.done + .prog-label { color: var(--green); }
-
-.prog-line { flex: 1; height: 1px; background: var(--border); margin: 0 4px; margin-bottom: 18px; }
-
-/* === CHART IMAGE ANALYSIS MODE INDICATOR === */
-.mode-indicator {
-  display: flex; align-items: center; gap: 8px;
-  background: rgba(192,132,252,0.07);
-  border: 1px solid rgba(192,132,252,0.2);
-  border-radius: 8px;
-  padding: 8px 14px;
-  margin-bottom: 14px;
-}
-
-.mode-indicator-icon { font-size: 16px; }
-.mode-indicator-text { font-family: var(--mono); font-size: 10px; color: var(--purple); letter-spacing: 1px; }
-.mode-indicator-text strong { color: var(--purple2); }
-
-/* scrollbar */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--surface); }
-::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--border3); }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<!-- ═══════════ HEADER ═══════════ -->
-<div class="nexus-header">
-  <div class="logo-block">
-    <div class="logo-eyebrow">Institutional Grade Trading Intelligence</div>
-    <div class="logo-title">NEXUS <span class="logo-pro">PRO</span></div>
-    <div class="logo-sub">
-      <span>// 5-Layer AI Engine</span>
-      <span>Tweet + Technical + Pattern + Structure + Vision</span>
+  <!-- HEADER -->
+  <header>
+    <div>
+      <div class="logo-eye">Chart Intelligence</div>
+      <h1>NEXUS</h1>
+      <div class="logo-sub">AI-POWERED TECHNICAL ANALYSIS ENGINE</div>
     </div>
+    <div class="header-badge">
+      <div class="badge-dot"></div>
+      AI ONLINE
+    </div>
+  </header>
+
+  <!-- UPLOAD ZONE -->
+  <div class="upload-zone" id="uploadZone">
+    <div id="uploadPrompt">
+      <span class="upload-icon">📊</span>
+      <div class="upload-title">Drop Chart Screenshot Here</div>
+      <div class="upload-hint">atau <span>klik untuk pilih file</span> · PNG, JPG, WEBP</div>
+    </div>
+    <div class="preview-wrap" id="previewWrap">
+      <img id="previewImg" src="" alt="Chart Preview">
+      <div class="preview-overlay">
+        <button class="btn-icon" onclick="clearImage(event)" title="Hapus">✕</button>
+      </div>
+    </div>
+    <input type="file" id="fileInput" accept="image/*">
   </div>
-  <div class="header-right">
-    <div class="status-pill"><div class="pulse-dot"></div>LIVE ENGINE</div>
-    <div class="hstats-row">
-      <div class="hstat">
-        <div class="hstat-val" id="totalAnalysis">0</div>
-        <div class="hstat-label">Analisis</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-val" style="color:var(--gold)">5</div>
-        <div class="hstat-label">AI Layer</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-val" style="color:var(--purple)">V2</div>
-        <div class="hstat-label">Engine</div>
-      </div>
+
+  <!-- META ROW -->
+  <div class="meta-row">
+    <div class="meta-group">
+      <div class="meta-label">Asset / Pair</div>
+      <input class="meta-input" id="assetInput" type="text" placeholder="XAU/USD, BTC/USDT...">
     </div>
-  </div>
-</div>
-
-<!-- ═══════════ STEP TABS ═══════════ -->
-<div class="steps-nav" id="stepsNav">
-  <button class="step-tab active" onclick="goTab(0)" id="tab0">
-    <span class="step-num">01</span>
-    <span class="step-icon">📢</span>
-    <span class="step-label">Tweet & Influencer</span>
-  </button>
-  <button class="step-tab" onclick="goTab(1)" id="tab1">
-    <span class="step-num">02</span>
-    <span class="step-icon">📊</span>
-    <span class="step-label">Analisis Teknikal</span>
-  </button>
-  <button class="step-tab" onclick="goTab(2)" id="tab2">
-    <span class="step-num">03</span>
-    <span class="step-icon">📈</span>
-    <span class="step-label">Chart & Pattern</span>
-  </button>
-  <button class="step-tab" onclick="goTab(3)" id="tab3">
-    <span class="step-num">04</span>
-    <span class="step-icon">🏗️</span>
-    <span class="step-label">Market Structure</span>
-  </button>
-  <button class="step-tab" onclick="goTab(4)" id="tab4">
-    <span class="step-num">RESULT</span>
-    <span class="step-icon">⚡</span>
-    <span class="step-label">Signal Akhir</span>
-  </button>
-</div>
-
-<!-- ═══════════════════════════════════════
-     PANEL 0 — TWEET & INFLUENCER
-════════════════════════════════════════ -->
-<div class="panel active" id="panel0">
-
-  <div class="card">
-    <div class="card-accent-top"></div>
-    <div class="card-title">// Pilih Influencer / Sumber Berita</div>
-    <div class="inf-grid">
-      <div class="inf-chip active" onclick="selectInf(this,'Donald Trump','10')" data-inf="Donald Trump" data-power="10">
-        <div class="inf-avatar">🇺🇸</div>
-        <div class="inf-info">
-          <div class="inf-handle">@realDonaldTrump</div>
-          <div class="inf-power">Market Power: MAX (10/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'Elon Musk','10')" data-inf="Elon Musk" data-power="10">
-        <div class="inf-avatar">🚀</div>
-        <div class="inf-info">
-          <div class="inf-handle">@elonmusk</div>
-          <div class="inf-power">Market Power: MAX (10/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'Michael Saylor','8')" data-inf="Michael Saylor" data-power="8">
-        <div class="inf-avatar">₿</div>
-        <div class="inf-info">
-          <div class="inf-handle">@saylor</div>
-          <div class="inf-power">Market Power: HIGH (8/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'Cathie Wood','7')" data-inf="Cathie Wood" data-power="7">
-        <div class="inf-avatar">📈</div>
-        <div class="inf-info">
-          <div class="inf-handle">@CathieDWood</div>
-          <div class="inf-power">Market Power: HIGH (7/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'Jerome Powell','9')" data-inf="Jerome Powell" data-power="9">
-        <div class="inf-avatar">🏦</div>
-        <div class="inf-info">
-          <div class="inf-handle">@FederalReserve</div>
-          <div class="inf-power">Market Power: V.HIGH (9/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'Vitalik Buterin','8')" data-inf="Vitalik Buterin" data-power="8">
-        <div class="inf-avatar">Ξ</div>
-        <div class="inf-info">
-          <div class="inf-handle">@VitalikButerin</div>
-          <div class="inf-power">Market Power: HIGH (8/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'CZ Binance','8')" data-inf="CZ Binance" data-power="8">
-        <div class="inf-avatar">🔶</div>
-        <div class="inf-info">
-          <div class="inf-handle">@cz_binance</div>
-          <div class="inf-power">Market Power: HIGH (8/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'Warren Buffett','7')" data-inf="Warren Buffett" data-power="7">
-        <div class="inf-avatar">🎩</div>
-        <div class="inf-info">
-          <div class="inf-handle">@WarrenBuffett</div>
-          <div class="inf-power">Market Power: HIGH (7/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'BlackRock ETF News','9')" data-inf="BlackRock ETF News" data-power="9">
-        <div class="inf-avatar">🏛️</div>
-        <div class="inf-info">
-          <div class="inf-handle">BlackRock / ETF Flow</div>
-          <div class="inf-power">Market Power: V.HIGH (9/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'SEC / Regulator','9')" data-inf="SEC / Regulator" data-power="9">
-        <div class="inf-avatar">⚖️</div>
-        <div class="inf-info">
-          <div class="inf-handle">SEC / Regulator</div>
-          <div class="inf-power">Market Power: V.HIGH (9/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'Crypto KOL','6')" data-inf="Crypto KOL" data-power="6">
-        <div class="inf-avatar">🎙️</div>
-        <div class="inf-info">
-          <div class="inf-handle">Crypto KOL / Twitter</div>
-          <div class="inf-power">Market Power: MED (6/10)</div>
-        </div>
-      </div>
-      <div class="inf-chip" onclick="selectInf(this,'Unknown','4')" data-inf="Unknown" data-power="4">
-        <div class="inf-avatar">👤</div>
-        <div class="inf-info">
-          <div class="inf-handle">Other / Unknown</div>
-          <div class="inf-power">Market Power: LOW (4/10)</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Custom influencer -->
-    <div class="custom-inf-row">
-      <input type="text" id="customInfName" placeholder="Atau ketik nama influencer kustom..." style="flex:1">
-      <select id="customInfPower" style="width:160px">
-        <option value="3">Power: LOW (3)</option>
-        <option value="5" selected>Power: MED (5)</option>
-        <option value="7">Power: HIGH (7)</option>
-        <option value="9">Power: V.HIGH (9)</option>
+    <div class="meta-group">
+      <div class="meta-label">Timeframe</div>
+      <select class="meta-select" id="tfSelect">
+        <option value="">— Pilih TF —</option>
+        <option value="M1">M1 — 1 Menit</option>
+        <option value="M5">M5 — 5 Menit</option>
+        <option value="M15">M15 — 15 Menit</option>
+        <option value="M30">M30 — 30 Menit</option>
+        <option value="H1">H1 — 1 Jam</option>
+        <option value="H4">H4 — 4 Jam</option>
+        <option value="D1">D1 — Daily</option>
+        <option value="W1">W1 — Weekly</option>
       </select>
-      <button class="btn btn-ghost" style="white-space:nowrap;padding:10px 14px;" onclick="setCustomInf()">Gunakan</button>
     </div>
-    <div style="margin-top:8px;font-family:var(--mono);font-size:10px;color:var(--muted);">
-      Dipilih: <span id="selInfLabel" style="color:var(--cyan)">Donald Trump</span>
-      <span style="margin-left:12px;color:var(--text3)">Power: <span id="selInfPower" style="color:var(--gold)">10</span>/10</span>
+    <div class="meta-group" style="justify-content:flex-end;">
+      <div class="meta-label">&nbsp;</div>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">// Isi Tweet / Statement / Headline</div>
-    <textarea id="tweetInput" placeholder="Paste isi tweet, berita, atau statement di sini... Contoh: 'Just bought more Bitcoin. The future is digital.'" maxlength="1200"></textarea>
-    <div style="display:flex;justify-content:space-between;margin-top:8px;align-items:center;flex-wrap:wrap;gap:8px;">
-      <span style="font-family:var(--mono);font-size:10px;color:var(--muted);" id="charCount">0/1200</span>
-      <div style="display:flex;gap:8px;">
-        <button class="btn btn-ghost" style="padding:6px 12px;font-size:11px;" onclick="clearTweet()">✕ Clear</button>
-        <button class="btn btn-ghost" style="padding:6px 12px;font-size:11px;" onclick="pasteSample()">📋 Contoh</button>
-      </div>
-    </div>
-  </div>
+  <!-- ANALYZE BUTTON -->
+  <button class="btn-analyze" id="analyzeBtn" onclick="analyze()">
+    ⚡ &nbsp; ANALYZE CHART
+  </button>
 
-  <div class="card">
-    <div class="card-title">// Asset Target Analisis</div>
-    <div class="asset-checks">
-      <label class="asset-chk-label"><input type="checkbox" id="chkBTC" checked><span>₿ BTC/USDT</span></label>
-      <label class="asset-chk-label"><input type="checkbox" id="chkETH" checked><span>Ξ ETH/USDT</span></label>
-      <label class="asset-chk-label"><input type="checkbox" id="chkXAU" checked><span>🥇 XAU/USD</span></label>
-      <label class="asset-chk-label"><input type="checkbox" id="chkSOL"><span>◎ SOL/USDT</span></label>
-      <label class="asset-chk-label"><input type="checkbox" id="chkDOGE"><span>🐕 DOGE/USDT</span></label>
-      <label class="asset-chk-label"><input type="checkbox" id="chkBNB"><span>🔶 BNB/USDT</span></label>
-      <label class="asset-chk-label"><input type="checkbox" id="chkXRP"><span>✕ XRP/USDT</span></label>
-      <label class="asset-chk-label"><input type="checkbox" id="chkDXY"><span>💵 DXY/USD</span></label>
-    </div>
-  </div>
+  <!-- LOADING -->
+  <div class="loading-bar" id="loadingBar"><div class="loading-fill"></div></div>
+  <div class="loading-text" id="loadingText">ANALYZING CHART STRUCTURE...</div>
 
-  <div class="btn-row">
-    <button class="btn btn-primary" onclick="goTab(1)">Lanjut ke Teknikal →</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     PANEL 1 — TECHNICAL ANALYSIS
-════════════════════════════════════════ -->
-<div class="panel" id="panel1">
-
-  <div class="card">
-    <div class="card-accent-top"></div>
-    <div class="card-title">// Timeframe & Asset</div>
-    <div class="grid-2">
-      <div class="field-group">
-        <div class="field-label">Timeframe Analisis Utama</div>
-        <select id="selTF">
-          <option value="1m">1 Minute (Scalping)</option>
-          <option value="5m">5 Minutes (Scalping)</option>
-          <option value="15m">15 Minutes (Intraday)</option>
-          <option value="30m">30 Minutes (Intraday)</option>
-          <option value="1h" selected>1 Hour (Swing)</option>
-          <option value="4h">4 Hours (Swing)</option>
-          <option value="1d">1 Day (Positional)</option>
-          <option value="1w">1 Week (Macro)</option>
-          <option value="1M">1 Month (Investment)</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Asset Utama</div>
-        <select id="selAsset">
-          <option value="BTC/USDT">BTC/USDT — Bitcoin</option>
-          <option value="ETH/USDT">ETH/USDT — Ethereum</option>
-          <option value="XAU/USD">XAU/USD — Gold</option>
-          <option value="SOL/USDT">SOL/USDT — Solana</option>
-          <option value="BNB/USDT">BNB/USDT — BNB</option>
-          <option value="XRP/USDT">XRP/USDT — XRP</option>
-          <option value="DOGE/USDT">DOGE/USDT — Dogecoin</option>
-          <option value="EUR/USD">EUR/USD — Forex</option>
-          <option value="SPX/USD">SPX/USD — S&P500</option>
-          <option value="DXY/USD">DXY/USD — Dollar Index</option>
-          <option value="WTI/USD">WTI/USD — Oil</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <!-- Multi-Timeframe -->
-  <div class="card">
-    <div class="card-title">// Multi-Timeframe (MTF) Analysis</div>
-    <div class="mtf-grid">
-      <div class="mtf-card">
-        <div class="mtf-tf">HTF</div>
-        <div class="field-group" style="margin-bottom:8px">
-          <div class="field-label">Higher TF</div>
-          <select id="selHTF">
-            <option value="1d">1 Day</option>
-            <option value="4h" selected>4 Hours</option>
-            <option value="1w">1 Week</option>
-          </select>
-        </div>
-        <div style="margin-top:6px">
-          <div class="field-label" style="margin-bottom:5px">HTF Trend</div>
-          <div class="seg-group">
-            <button class="seg-btn up active" onclick="selectSeg(this,'htfTrend','uptrend')">↗ UP</button>
-            <button class="seg-btn side" onclick="selectSeg(this,'htfTrend','sideways')">→</button>
-            <button class="seg-btn down" onclick="selectSeg(this,'htfTrend','downtrend')">↘ DOWN</button>
-          </div>
-        </div>
-      </div>
-      <div class="mtf-card">
-        <div class="mtf-tf">MTF</div>
-        <div class="field-group" style="margin-bottom:8px">
-          <div class="field-label">Mid TF (sama dengan utama)</div>
-          <select id="selMTF">
-            <option value="1h" selected>1 Hour</option>
-            <option value="4h">4 Hours</option>
-            <option value="15m">15 Minutes</option>
-          </select>
-        </div>
-        <div style="margin-top:6px">
-          <div class="field-label" style="margin-bottom:5px">MTF Trend</div>
-          <div class="seg-group">
-            <button class="seg-btn up active" onclick="selectSeg(this,'mtfTrend','uptrend')">↗ UP</button>
-            <button class="seg-btn side" onclick="selectSeg(this,'mtfTrend','sideways')">→</button>
-            <button class="seg-btn down" onclick="selectSeg(this,'mtfTrend','downtrend')">↘ DOWN</button>
-          </div>
-        </div>
-      </div>
-      <div class="mtf-card">
-        <div class="mtf-tf">LTF</div>
-        <div class="field-group" style="margin-bottom:8px">
-          <div class="field-label">Lower TF</div>
-          <select id="selLTF">
-            <option value="15m">15 Minutes</option>
-            <option value="5m" selected>5 Minutes</option>
-            <option value="1m">1 Minute</option>
-          </select>
-        </div>
-        <div style="margin-top:6px">
-          <div class="field-label" style="margin-bottom:5px">LTF Trend</div>
-          <div class="seg-group">
-            <button class="seg-btn up active" onclick="selectSeg(this,'ltfTrend','uptrend')">↗ UP</button>
-            <button class="seg-btn side" onclick="selectSeg(this,'ltfTrend','sideways')">→</button>
-            <button class="seg-btn down" onclick="selectSeg(this,'ltfTrend','downtrend')">↘ DOWN</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Trend -->
-  <div class="card">
-    <div class="card-title">// Kondisi Trend & Moving Average</div>
-    <div class="grid-2">
-      <div>
-        <div class="field-label" style="margin-bottom:8px">Arah Trend Utama</div>
-        <div class="seg-group">
-          <button class="seg-btn up active" onclick="selectSeg(this,'trend','uptrend')">↗ UPTREND</button>
-          <button class="seg-btn side" onclick="selectSeg(this,'trend','sideways')">→ SIDEWAYS</button>
-          <button class="seg-btn down" onclick="selectSeg(this,'trend','downtrend')">↘ DOWNTREND</button>
-        </div>
-      </div>
-      <div>
-        <div class="field-label" style="margin-bottom:8px">Posisi Harga vs MA</div>
-        <div class="seg-group">
-          <button class="seg-btn up active" onclick="selectSeg(this,'ma','above')">↑ ATAS MA</button>
-          <button class="seg-btn side" onclick="selectSeg(this,'ma','cross')">✕ CROSS</button>
-          <button class="seg-btn down" onclick="selectSeg(this,'ma','below')">↓ BAWAH MA</button>
-        </div>
-      </div>
-    </div>
-    <div class="grid-3" style="margin-top:14px">
-      <div class="field-group">
-        <div class="field-label">MA 20 vs MA 50</div>
-        <select id="selMA2050">
-          <option value="golden">Golden Cross (MA20 > MA50)</option>
-          <option value="above" selected>MA20 di atas MA50</option>
-          <option value="death">Death Cross (MA20 < MA50)</option>
-          <option value="below">MA20 di bawah MA50</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">EMA 200</div>
-        <select id="selEMA200">
-          <option value="above" selected>Harga di atas EMA200</option>
-          <option value="cross">Cross EMA200</option>
-          <option value="below">Harga di bawah EMA200</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Tipe Trend</div>
-        <select id="selTrendType">
-          <option value="strong" selected>Trend Kuat</option>
-          <option value="weak">Trend Lemah</option>
-          <option value="reversal">Potensi Reversal</option>
-          <option value="consolidation">Konsolidasi</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <!-- Price Levels -->
-  <div class="card">
-    <div class="card-title">// Harga & Level Kunci</div>
-    <div class="price-row" style="grid-template-columns: repeat(3,1fr)">
-      <div class="price-field">
-        <div class="price-label">Harga Saat Ini</div>
-        <input type="number" id="priceCurrent" placeholder="e.g. 67500">
-      </div>
-      <div class="price-field">
-        <div class="price-label">Support Terdekat</div>
-        <input type="number" id="priceSupport" placeholder="e.g. 65000">
-      </div>
-      <div class="price-field">
-        <div class="price-label">Resistance Terdekat</div>
-        <input type="number" id="priceResist" placeholder="e.g. 70000">
-      </div>
-      <div class="price-field">
-        <div class="price-label">Support Major</div>
-        <input type="number" id="priceSupportMaj" placeholder="e.g. 60000">
-      </div>
-      <div class="price-field">
-        <div class="price-label">Resistance Major</div>
-        <input type="number" id="priceResistMaj" placeholder="e.g. 75000">
-      </div>
-      <div class="price-field">
-        <div class="price-label">Stop Loss Target</div>
-        <input type="number" id="priceSL" placeholder="e.g. 64000">
-      </div>
-    </div>
-  </div>
-
-  <!-- Indicators -->
-  <div class="card">
-    <div class="card-title">// Indikator Teknikal</div>
-    <div class="grid-2" style="gap:12px">
-      <div class="field-group">
-        <div class="field-label">Kondisi Volume</div>
-        <select id="selVolume">
-          <option value="high_bullish">Volume Tinggi + Candle Bullish</option>
-          <option value="high_bearish">Volume Tinggi + Candle Bearish</option>
-          <option value="normal" selected>Volume Normal</option>
-          <option value="low">Volume Rendah</option>
-          <option value="declining">Volume Menurun (Divergence)</option>
-          <option value="dry">Volume Sangat Kering</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">RSI (14)</div>
-        <select id="selRSI">
-          <option value="overbought_extreme">85+ (Extreme Overbought)</option>
-          <option value="overbought">70-85 (Overbought)</option>
-          <option value="high">60-70 (Bullish Zone)</option>
-          <option value="neutral" selected>40-60 (Neutral)</option>
-          <option value="low">30-40 (Bearish Zone)</option>
-          <option value="oversold">15-30 (Oversold)</option>
-          <option value="oversold_extreme">0-15 (Extreme Oversold)</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">MACD Signal</div>
-        <select id="selMACD">
-          <option value="bullish_cross">Golden Cross (Buy Signal)</option>
-          <option value="bullish" selected>MACD > Signal Line (Bullish)</option>
-          <option value="neutral_above">Mendekati Bullish Cross</option>
-          <option value="neutral_below">Mendekati Death Cross</option>
-          <option value="bearish">MACD < Signal Line (Bearish)</option>
-          <option value="death_cross">Death Cross (Sell Signal)</option>
-          <option value="divergence_bull">Bullish Divergence</option>
-          <option value="divergence_bear">Bearish Divergence</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Bollinger Bands</div>
-        <select id="selBB">
-          <option value="squeeze">BB Squeeze (Explosive Breakout)</option>
-          <option value="upper_touch">Menyentuh Upper Band</option>
-          <option value="upper_break">Breakout Upper Band</option>
-          <option value="middle" selected>Di Tengah Bands</option>
-          <option value="lower_touch">Menyentuh Lower Band</option>
-          <option value="lower_break">Breakdown Lower Band</option>
-          <option value="expansion">Expansion (High Volatility)</option>
-          <option value="walking_up">Walking Upper Band (Strong Bull)</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Stochastic / RSI Stoch</div>
-        <select id="selStoch">
-          <option value="overbought">Overbought (>80)</option>
-          <option value="neutral" selected>Neutral (20-80)</option>
-          <option value="oversold">Oversold (<20)</option>
-          <option value="bullish_cross">Bullish Cross di Oversold</option>
-          <option value="bearish_cross">Bearish Cross di Overbought</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">ADX (Trend Strength)</div>
-        <select id="selADX">
-          <option value="very_strong">ADX >50 (Very Strong Trend)</option>
-          <option value="strong" selected>ADX 25-50 (Strong Trend)</option>
-          <option value="weak">ADX 15-25 (Weak Trend)</option>
-          <option value="very_weak">ADX <15 (No Trend/Range)</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Ichimoku Cloud</div>
-        <select id="selIchimoku">
-          <option value="above_bullish">Di atas Cloud (Bullish)</option>
-          <option value="inside">Di dalam Cloud (Uncertain)</option>
-          <option value="below_bearish">Di bawah Cloud (Bearish)</option>
-          <option value="bullish_cross">TK/KJ Bullish Cross</option>
-          <option value="bearish_cross">TK/KJ Bearish Cross</option>
-          <option value="n_a" selected>Tidak Digunakan</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Fibonacci Retracement</div>
-        <select id="selFib">
-          <option value="above_786">Di atas 78.6% (Strong)</option>
-          <option value="at_618">Bounce dari 61.8% (Golden Ratio)</option>
-          <option value="at_500" selected>Bounce dari 50% (Mid)</option>
-          <option value="at_382">Bounce dari 38.2%</option>
-          <option value="at_236">Bounce dari 23.6%</option>
-          <option value="below_786">Break below 78.6% (Bearish)</option>
-          <option value="n_a">Tidak Ada</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <!-- Market Context -->
-  <div class="card">
-    <div class="card-title">// Market Context & Makro</div>
-    <div class="grid-2">
-      <div class="field-group">
-        <div class="field-label">Fear & Greed Index</div>
-        <select id="selMarketSent">
-          <option value="extreme_greed">Extreme Greed (75-100)</option>
-          <option value="greed">Greed (55-75)</option>
-          <option value="neutral" selected>Neutral (45-55)</option>
-          <option value="fear">Fear (25-45)</option>
-          <option value="extreme_fear">Extreme Fear (0-25)</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">BTC Dominance</div>
-        <select id="selBTCDom">
-          <option value="rising_high">Sangat Naik >55% (Risk Off)</option>
-          <option value="rising">Naik (Altcoin tertekan)</option>
-          <option value="stable" selected>Stabil</option>
-          <option value="falling">Turun (Alt Season potensi)</option>
-          <option value="falling_fast">Turun Cepat (Alt Season)</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Open Interest (Futures)</div>
-        <select id="selOI">
-          <option value="high_rising">Tinggi & Naik (High Leverage)</option>
-          <option value="normal" selected>Normal</option>
-          <option value="low">Rendah (Kurang Likuid)</option>
-          <option value="rising_price_rising">OI + Price naik (Strong Bull)</option>
-          <option value="rising_price_falling">OI naik + Price turun (Distribution)</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Funding Rate (Futures)</div>
-        <select id="selFunding">
-          <option value="very_positive">Sangat Positif (Long Crowded)</option>
-          <option value="positive">Positif (Bullish Bias)</option>
-          <option value="neutral" selected>Netral</option>
-          <option value="negative">Negatif (Bearish Bias)</option>
-          <option value="very_negative">Sangat Negatif (Short Crowded)</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="btn-row">
-    <button class="btn btn-ghost" onclick="goTab(0)">← Kembali</button>
-    <button class="btn btn-primary" onclick="goTab(2)">Lanjut ke Chart & Pattern →</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     PANEL 2 — CHART & PATTERN
-════════════════════════════════════════ -->
-<div class="panel" id="panel2">
-
-  <!-- Chart Upload -->
-  <div class="card">
-    <div class="card-accent-top"></div>
-    <div class="card-title">// Unggah Chart (Opsional — AI Vision)</div>
-
-    <div class="chart-mode-tabs">
-      <div class="chart-mode-tab active" onclick="setChartMode('upload',this)">📸 Upload Chart Image</div>
-      <div class="chart-mode-tab" onclick="setChartMode('manual',this)">✏️ Input Manual Saja</div>
-    </div>
-
-    <div class="chart-mode-content active" id="chartModeUpload">
-      <div class="mode-indicator">
-        <span class="mode-indicator-icon">🤖</span>
-        <span class="mode-indicator-text"><strong>AI VISION MODE:</strong> Claude akan menganalisis gambar chart secara langsung dan mengidentifikasi candlestick, support/resistance, dan pola secara otomatis.</span>
-      </div>
-      <div class="chart-upload-zone" id="uploadZone">
-        <input type="file" id="chartFile" accept="image/*" onchange="handleChartUpload(event)">
-        <div class="chart-upload-icon">📊</div>
-        <div class="chart-upload-title">Drop atau klik untuk upload screenshot chart</div>
-        <div class="chart-upload-sub">PNG, JPG, WEBP — Max 5MB — TradingView / Binance / MT4</div>
-      </div>
-      <img id="chartPreview" alt="Chart preview">
-      <div id="chartUploadedMsg" style="display:none;font-family:var(--mono);font-size:10px;color:var(--green);margin-top:8px;letter-spacing:1px;">
-        ✓ Chart ter-upload — AI akan menganalisis secara visual
-      </div>
-    </div>
-
-    <div class="chart-mode-content" id="chartModeManual">
-      <p style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;">Mode manual: pola & data diisi secara manual di bawah.</p>
-    </div>
-  </div>
-
-  <!-- Candlestick Patterns -->
-  <div class="card">
-    <div class="card-title">// Pola Candlestick (Pilih yang Terlihat di Chart)</div>
-
-    <div class="sub-tabs">
-      <button class="sub-tab active" onclick="setSubTab('patBull',this)">🟢 Bullish</button>
-      <button class="sub-tab" onclick="setSubTab('patBear',this)">🔴 Bearish</button>
-      <button class="sub-tab" onclick="setSubTab('patNeutral',this)">🟡 Neutral / Chart</button>
-      <button class="sub-tab" onclick="setSubTab('patCont',this)">↗ Continuation</button>
-    </div>
-
-    <!-- Bullish Patterns -->
-    <div class="sub-content active" id="patBull">
-      <div class="pattern-grid">
-        <div class="pattern-chip" onclick="togglePattern(this,'bullish_engulfing',1.8)" data-id="bullish_engulfing">
-          <span class="pattern-icon">🕯️</span>
-          <div class="pattern-name">Bullish Engulfing</div>
-          <div class="pattern-signal bull">BULL +1.8</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'hammer',1.5)" data-id="hammer">
-          <span class="pattern-icon">🔨</span>
-          <div class="pattern-name">Hammer</div>
-          <div class="pattern-signal bull">BULL +1.5</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'inverted_hammer',1.3)" data-id="inverted_hammer">
-          <span class="pattern-icon">🪶</span>
-          <div class="pattern-name">Inv. Hammer</div>
-          <div class="pattern-signal bull">BULL +1.3</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'morning_star',2.0)" data-id="morning_star">
-          <span class="pattern-icon">⭐</span>
-          <div class="pattern-name">Morning Star</div>
-          <div class="pattern-signal bull">BULL +2.0</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'morning_doji_star',2.2)" data-id="morning_doji_star">
-          <span class="pattern-icon">🌟</span>
-          <div class="pattern-name">Morning Doji Star</div>
-          <div class="pattern-signal bull">BULL +2.2</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'inv_head_shoulder',2.2)" data-id="inv_head_shoulder">
-          <span class="pattern-icon">🏔️</span>
-          <div class="pattern-name">Inv. H&S</div>
-          <div class="pattern-signal bull">BULL +2.2</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'double_bottom',2.0)" data-id="double_bottom">
-          <span class="pattern-icon">W</span>
-          <div class="pattern-name">Double Bottom</div>
-          <div class="pattern-signal bull">BULL +2.0</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'triple_bottom',2.5)" data-id="triple_bottom">
-          <span class="pattern-icon">WWW</span>
-          <div class="pattern-name">Triple Bottom</div>
-          <div class="pattern-signal bull">BULL +2.5</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'dragonfly_doji',1.4)" data-id="dragonfly_doji">
-          <span class="pattern-icon">🐉</span>
-          <div class="pattern-name">Dragonfly Doji</div>
-          <div class="pattern-signal bull">BULL +1.4</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'three_white_soldiers',2.0)" data-id="three_white_soldiers">
-          <span class="pattern-icon">🟢🟢🟢</span>
-          <div class="pattern-name">3 White Soldiers</div>
-          <div class="pattern-signal bull">BULL +2.0</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'piercing_line',1.6)" data-id="piercing_line">
-          <span class="pattern-icon">💉</span>
-          <div class="pattern-name">Piercing Line</div>
-          <div class="pattern-signal bull">BULL +1.6</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'tweezer_bottom',1.5)" data-id="tweezer_bottom">
-          <span class="pattern-icon">🔧</span>
-          <div class="pattern-name">Tweezer Bottom</div>
-          <div class="pattern-signal bull">BULL +1.5</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bearish Patterns -->
-    <div class="sub-content" id="patBear">
-      <div class="pattern-grid">
-        <div class="pattern-chip" onclick="togglePattern(this,'bearish_engulfing',-1.8)" data-id="bearish_engulfing">
-          <span class="pattern-icon">🕯️</span>
-          <div class="pattern-name">Bearish Engulfing</div>
-          <div class="pattern-signal bear">BEAR -1.8</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'shooting_star',-1.5)" data-id="shooting_star">
-          <span class="pattern-icon">💫</span>
-          <div class="pattern-name">Shooting Star</div>
-          <div class="pattern-signal bear">BEAR -1.5</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'hanging_man',-1.4)" data-id="hanging_man">
-          <span class="pattern-icon">🪢</span>
-          <div class="pattern-name">Hanging Man</div>
-          <div class="pattern-signal bear">BEAR -1.4</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'evening_star',-2.0)" data-id="evening_star">
-          <span class="pattern-icon">🌙</span>
-          <div class="pattern-name">Evening Star</div>
-          <div class="pattern-signal bear">BEAR -2.0</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'evening_doji_star',-2.2)" data-id="evening_doji_star">
-          <span class="pattern-icon">🌑</span>
-          <div class="pattern-name">Evening Doji Star</div>
-          <div class="pattern-signal bear">BEAR -2.2</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'head_shoulder',-2.2)" data-id="head_shoulder">
-          <span class="pattern-icon">👤</span>
-          <div class="pattern-name">Head & Shoulder</div>
-          <div class="pattern-signal bear">BEAR -2.2</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'double_top',-2.0)" data-id="double_top">
-          <span class="pattern-icon">M</span>
-          <div class="pattern-name">Double Top</div>
-          <div class="pattern-signal bear">BEAR -2.0</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'triple_top',-2.5)" data-id="triple_top">
-          <span class="pattern-icon">MMM</span>
-          <div class="pattern-name">Triple Top</div>
-          <div class="pattern-signal bear">BEAR -2.5</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'three_black_crows',-2.0)" data-id="three_black_crows">
-          <span class="pattern-icon">🔴🔴🔴</span>
-          <div class="pattern-name">3 Black Crows</div>
-          <div class="pattern-signal bear">BEAR -2.0</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'gravestone_doji',-1.4)" data-id="gravestone_doji">
-          <span class="pattern-icon">🪦</span>
-          <div class="pattern-name">Gravestone Doji</div>
-          <div class="pattern-signal bear">BEAR -1.4</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'dark_cloud',-1.6)" data-id="dark_cloud">
-          <span class="pattern-icon">☁️</span>
-          <div class="pattern-name">Dark Cloud Cover</div>
-          <div class="pattern-signal bear">BEAR -1.6</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'tweezer_top',-1.5)" data-id="tweezer_top">
-          <span class="pattern-icon">🔩</span>
-          <div class="pattern-name">Tweezer Top</div>
-          <div class="pattern-signal bear">BEAR -1.5</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Neutral / Chart Patterns -->
-    <div class="sub-content" id="patNeutral">
-      <div class="pattern-grid">
-        <div class="pattern-chip" onclick="togglePattern(this,'doji',0)" data-id="doji">
-          <span class="pattern-icon">➕</span>
-          <div class="pattern-name">Doji</div>
-          <div class="pattern-signal neut">NEUTRAL</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'spinning_top',0)" data-id="spinning_top">
-          <span class="pattern-icon">🌀</span>
-          <div class="pattern-name">Spinning Top</div>
-          <div class="pattern-signal neut">NEUTRAL</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'harami',0.5)" data-id="harami">
-          <span class="pattern-icon">🫂</span>
-          <div class="pattern-name">Bullish Harami</div>
-          <div class="pattern-signal bull">BULL +0.5</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'harami_bear',-0.5)" data-id="harami_bear">
-          <span class="pattern-icon">🫂</span>
-          <div class="pattern-name">Bearish Harami</div>
-          <div class="pattern-signal bear">BEAR -0.5</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'inside_bar',0.3)" data-id="inside_bar">
-          <span class="pattern-icon">📦</span>
-          <div class="pattern-name">Inside Bar</div>
-          <div class="pattern-signal neut">+0.3</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'outside_bar',0.4)" data-id="outside_bar">
-          <span class="pattern-icon">📐</span>
-          <div class="pattern-name">Outside Bar</div>
-          <div class="pattern-signal neut">+0.4</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'pin_bar_bull',1.6)" data-id="pin_bar_bull">
-          <span class="pattern-icon">📍</span>
-          <div class="pattern-name">Bullish Pin Bar</div>
-          <div class="pattern-signal bull">BULL +1.6</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'pin_bar_bear',-1.6)" data-id="pin_bar_bear">
-          <span class="pattern-icon">📌</span>
-          <div class="pattern-name">Bearish Pin Bar</div>
-          <div class="pattern-signal bear">BEAR -1.6</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Continuation Patterns -->
-    <div class="sub-content" id="patCont">
-      <div class="pattern-grid">
-        <div class="pattern-chip" onclick="togglePattern(this,'bullish_flag',1.6)" data-id="bullish_flag">
-          <span class="pattern-icon">🚩</span>
-          <div class="pattern-name">Bullish Flag</div>
-          <div class="pattern-signal bull">BULL +1.6</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'bearish_flag',-1.6)" data-id="bearish_flag">
-          <span class="pattern-icon">🏴</span>
-          <div class="pattern-name">Bearish Flag</div>
-          <div class="pattern-signal bear">BEAR -1.6</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'bull_pennant',1.5)" data-id="bull_pennant">
-          <span class="pattern-icon">📐</span>
-          <div class="pattern-name">Bull Pennant</div>
-          <div class="pattern-signal bull">BULL +1.5</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'bear_pennant',-1.5)" data-id="bear_pennant">
-          <span class="pattern-icon">🔻</span>
-          <div class="pattern-name">Bear Pennant</div>
-          <div class="pattern-signal bear">BEAR -1.5</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'sym_triangle',0.5)" data-id="sym_triangle">
-          <span class="pattern-icon">△</span>
-          <div class="pattern-name">Sym. Triangle</div>
-          <div class="pattern-signal neut">NEUT +0.5</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'asc_triangle',1.4)" data-id="asc_triangle">
-          <span class="pattern-icon">△</span>
-          <div class="pattern-name">Asc. Triangle</div>
-          <div class="pattern-signal bull">BULL +1.4</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'desc_triangle',-1.4)" data-id="desc_triangle">
-          <span class="pattern-icon">▽</span>
-          <div class="pattern-name">Desc. Triangle</div>
-          <div class="pattern-signal bear">BEAR -1.4</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'cup_handle',1.8)" data-id="cup_handle">
-          <span class="pattern-icon">☕</span>
-          <div class="pattern-name">Cup & Handle</div>
-          <div class="pattern-signal bull">BULL +1.8</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'wedge_fall',1.4)" data-id="wedge_fall">
-          <span class="pattern-icon">🔻</span>
-          <div class="pattern-name">Falling Wedge</div>
-          <div class="pattern-signal bull">BULL +1.4</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'wedge_rise',-1.4)" data-id="wedge_rise">
-          <span class="pattern-icon">🔺</span>
-          <div class="pattern-name">Rising Wedge</div>
-          <div class="pattern-signal bear">BEAR -1.4</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'channel_up',0.8)" data-id="channel_up">
-          <span class="pattern-icon">📈</span>
-          <div class="pattern-name">Uptrend Channel</div>
-          <div class="pattern-signal bull">BULL +0.8</div>
-        </div>
-        <div class="pattern-chip" onclick="togglePattern(this,'channel_down',-0.8)" data-id="channel_down">
-          <span class="pattern-icon">📉</span>
-          <div class="pattern-name">Downtrend Channel</div>
-          <div class="pattern-signal bear">BEAR -0.8</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Pattern Score Display -->
-    <div class="divider"></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
-      <span style="font-family:var(--mono);font-size:10px;color:var(--muted);">
-        Pattern dipilih: <span id="patternCount" style="color:var(--gold)">0</span> pola
-      </span>
-      <span style="font-family:var(--mono);font-size:10px;color:var(--muted);">
-        Pattern bias: <span id="patternBias" style="color:var(--cyan)">NEUTRAL</span>
-      </span>
-      <button class="btn btn-ghost" style="padding:5px 12px;font-size:10px;" onclick="clearPatterns()">Clear Semua</button>
-    </div>
-  </div>
-
-  <div class="btn-row">
-    <button class="btn btn-ghost" onclick="goTab(1)">← Kembali</button>
-    <button class="btn btn-primary" onclick="goTab(3)">Lanjut ke Market Structure →</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     PANEL 3 — MARKET STRUCTURE (ICT/SMC)
-════════════════════════════════════════ -->
-<div class="panel" id="panel3">
-
-  <div class="card">
-    <div class="card-accent-top"></div>
-    <div class="card-title">// ICT / SMC — Break of Structure & Change of Character</div>
-
-    <div class="struct-row">
-      <div class="struct-chip" onclick="toggleStruct(this,'bos_bullish')" data-id="bos_bullish">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-          <span class="tag tag-bos">BOS ↗</span>
-          <span class="tag tag-hh">HH</span>
-        </div>
-        <div class="struct-title">BOS — Bullish</div>
-        <div class="struct-desc">Break of Structure ke atas. Harga berhasil membuat Higher High baru yang valid.</div>
-      </div>
-      <div class="struct-chip" onclick="toggleStruct(this,'bos_bearish')" data-id="bos_bearish">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-          <span class="tag tag-bos">BOS ↘</span>
-          <span class="tag tag-ll">LL</span>
-        </div>
-        <div class="struct-title">BOS — Bearish</div>
-        <div class="struct-desc">Break of Structure ke bawah. Harga membuat Lower Low yang signifikan.</div>
-      </div>
-      <div class="struct-chip" onclick="toggleStruct(this,'choch_bullish')" data-id="choch_bullish">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-          <span class="tag tag-choch">CHoCH ↗</span>
-        </div>
-        <div class="struct-title">CHoCH — Bullish Reversal</div>
-        <div class="struct-desc">Change of Character ke Bullish. Bearish structure tiba-tiba patah ke atas.</div>
-      </div>
-      <div class="struct-chip" onclick="toggleStruct(this,'choch_bearish')" data-id="choch_bearish">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-          <span class="tag tag-choch">CHoCH ↘</span>
-        </div>
-        <div class="struct-title">CHoCH — Bearish Reversal</div>
-        <div class="struct-desc">Change of Character ke Bearish. Bullish structure tiba-tiba patah ke bawah.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">// Order Block & Fair Value Gap (FVG)</div>
-    <div class="grid-2">
-      <div>
-        <div class="field-label" style="margin-bottom:8px">Order Block</div>
-        <div class="seg-group">
-          <button class="seg-btn up active" onclick="selectSeg(this,'orderBlock','bullish_ob')">🟢 Bullish OB</button>
-          <button class="seg-btn side" onclick="selectSeg(this,'orderBlock','none')">— Tidak Ada</button>
-          <button class="seg-btn down" onclick="selectSeg(this,'orderBlock','bearish_ob')">🔴 Bearish OB</button>
-        </div>
-      </div>
-      <div>
-        <div class="field-label" style="margin-bottom:8px">Fair Value Gap (FVG/Imbalance)</div>
-        <div class="seg-group">
-          <button class="seg-btn up active" onclick="selectSeg(this,'fvg','bullish_fvg')">↑ Bullish FVG</button>
-          <button class="seg-btn side" onclick="selectSeg(this,'fvg','none')">— None</button>
-          <button class="seg-btn down" onclick="selectSeg(this,'fvg','bearish_fvg')">↓ Bearish FVG</button>
-        </div>
-      </div>
-    </div>
-    <div class="grid-2" style="margin-top:14px">
-      <div class="field-group">
-        <div class="field-label">Liquidity Zone</div>
-        <select id="selLiquidity">
-          <option value="bsl">Buy-Side Liquidity (BSL) di atas</option>
-          <option value="ssl">Sell-Side Liquidity (SSL) di bawah</option>
-          <option value="both">Both Side Liquidity</option>
-          <option value="swept_bsl">BSL Sudah di-Sweep</option>
-          <option value="swept_ssl">SSL Sudah di-Sweep</option>
-          <option value="none" selected>Tidak Teridentifikasi</option>
-        </select>
-      </div>
-      <div class="field-group">
-        <div class="field-label">Premium / Discount Zone</div>
-        <select id="selPremDisc">
-          <option value="premium">Premium Zone (>50% Fib — Jual)</option>
-          <option value="equilibrium" selected>Equilibrium (50% Fib)</option>
-          <option value="discount">Discount Zone (<50% Fib — Beli)</option>
-        </select>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">// Higher High / Lower Low Structure</div>
-    <div class="grid-2">
-      <div>
-        <div class="field-label" style="margin-bottom:8px">Struktur Price Action</div>
-        <div class="seg-group" style="flex-direction:column;gap:4px">
-          <button class="seg-btn up active" onclick="selectSeg(this,'priceStruct','hh_hl')" style="text-align:left">HH + HL (Bullish Structure)</button>
-          <button class="seg-btn down" onclick="selectSeg(this,'priceStruct','lh_ll')" style="text-align:left">LH + LL (Bearish Structure)</button>
-          <button class="seg-btn side" onclick="selectSeg(this,'priceStruct','range')" style="text-align:left">Equal High/Low (Range)</button>
-        </div>
-      </div>
-      <div>
-        <div class="field-label" style="margin-bottom:8px">Swing High / Swing Low Terbaru</div>
-        <div class="field-group" style="margin-bottom:10px">
-          <div class="field-label" style="font-size:8px">Swing High Terakhir</div>
-          <input type="number" id="swingHigh" placeholder="e.g. 70000">
-        </div>
-        <div class="field-group">
-          <div class="field-label" style="font-size:8px">Swing Low Terakhir</div>
-          <input type="number" id="swingLow" placeholder="e.g. 62000">
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">// Catatan Tambahan (Opsional)</div>
-    <textarea id="additionalNotes" style="min-height:80px" placeholder="Tambahkan observasi atau catatan kamu tentang market saat ini... contoh: 'ada news FOMC hari ini', 'BTC baru saja test ATH', dll."></textarea>
-  </div>
-
-  <div class="btn-row">
-    <button class="btn btn-ghost" onclick="goTab(2)">← Kembali</button>
-    <button class="btn btn-gold" id="runBtn" onclick="runAnalysis()">⚡ Jalankan Analisis NEXUS PRO</button>
-  </div>
-
-  <div class="loading-bar" id="loadingBar">
-    <div class="loading-track"><div class="loading-fill"></div></div>
-    <div class="loading-text"><span class="loading-dot">▋</span> <span id="loadMsg">Menginisialisasi NEXUS engine...</span></div>
-  </div>
-
+  <!-- ERROR -->
   <div class="error-box" id="errorBox"></div>
+
+  <!-- RESULT -->
+  <div id="resultSection">
+
+    <!-- SIGNAL HERO -->
+    <div class="signal-hero" id="signalHero">
+      <div class="signal-badge" id="signalBadge">—</div>
+      <div class="signal-info">
+        <div class="signal-asset" id="signalAsset">—</div>
+        <div class="signal-trend" id="signalTrend">—</div>
+        <div class="signal-desc" id="signalDesc">—</div>
+      </div>
+      <div class="signal-score-wrap">
+        <svg class="score-ring-svg" viewBox="0 0 90 90">
+          <circle class="score-ring-bg" cx="45" cy="45" r="40"/>
+          <circle class="score-ring-fill" id="scoreRing" cx="45" cy="45" r="40"/>
+          <text class="score-ring-text" id="scoreVal" x="45" y="49" text-anchor="middle">—</text>
+          <text class="score-ring-label" x="45" y="60" text-anchor="middle">SCORE</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- ENTRY STRATEGY -->
+    <div class="card full" id="stratCard">
+      <div class="card-head">🎯 Entry Strategy</div>
+      <div class="strat-grid" id="stratGrid"></div>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- SUPPORT & RESISTANCE -->
+      <div class="card">
+        <div class="card-head">📍 Support & Resistance</div>
+        <div class="levels-list" id="levelsList"></div>
+      </div>
+
+      <!-- CANDLESTICK PATTERNS -->
+      <div class="card">
+        <div class="card-head">🕯 Candlestick Patterns</div>
+        <div class="pattern-tags" id="patternTags"></div>
+        <div style="margin-top:12px; font-size:12px; color:var(--text2); line-height:1.6;" id="patternDesc"></div>
+      </div>
+
+      <!-- MOMENTUM -->
+      <div class="card">
+        <div class="card-head">⚡ Momentum</div>
+        <div class="gauge-row" id="gaugeRow"></div>
+      </div>
+
+      <!-- MARKET STRUCTURE -->
+      <div class="card">
+        <div class="card-head">🏗 Market Structure</div>
+        <div class="struct-tags" id="structTags"></div>
+        <div class="struct-desc" id="structDesc"></div>
+      </div>
+
+    </div>
+
+    <!-- RISK -->
+    <div class="card full">
+      <div class="card-head">⚠ Risk Assessment</div>
+      <div class="risk-row">
+        <div class="risk-num" id="riskNum">—</div>
+        <div class="risk-info">
+          <div class="risk-name" id="riskName">—</div>
+          <div class="risk-track"><div class="risk-fill" id="riskFill"></div></div>
+        </div>
+      </div>
+      <div style="font-size:13px; color:var(--text2); line-height:1.6;" id="riskDesc"></div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div class="card full">
+      <div class="card-head">✓ Konfirmasi Checklist</div>
+      <div class="checklist" id="checklist"></div>
+    </div>
+
+    <!-- NARRATIVE -->
+    <div class="card full">
+      <div class="card-head">📝 AI Narrative</div>
+      <div class="narrative-text" id="narrativeText"></div>
+    </div>
+
+  </div>
+
+  <!-- HISTORY -->
+  <div class="hist-section" id="histSection" style="display:none">
+    <div class="divider"></div>
+    <div class="hist-header">
+      <div class="hist-title">📁 &nbsp; History Analisa</div>
+      <button class="btn-clear" onclick="clearHistory()">HAPUS SEMUA</button>
+    </div>
+    <div class="hist-list" id="histList"></div>
+  </div>
+
 </div>
-
-<!-- ═══════════════════════════════════════
-     PANEL 4 — RESULT
-════════════════════════════════════════ -->
-<div class="panel" id="panel4">
-
-  <!-- Signal Hero -->
-  <div class="result-hero" id="resultHero">
-    <div class="result-hero-top">
-      <div class="signal-main">
-        <div class="signal-icon" id="signalIcon">⚡</div>
-        <div class="signal-text">
-          <div class="signal-label">// NEXUS PRO COMPOSITE SIGNAL</div>
-          <div class="signal-value" id="signalValue">—</div>
-          <div class="signal-subtitle" id="signalSub">—</div>
-        </div>
-      </div>
-      <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
-        <!-- Score Ring -->
-        <div style="text-align:center">
-          <svg width="96" height="96" viewBox="0 0 100 100" class="score-ring-svg">
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#152438" stroke-width="8"/>
-            <circle id="scoreCircle" cx="50" cy="50" r="40" fill="none" stroke="#00d4ff" stroke-width="8"
-              stroke-dasharray="251.2" stroke-dashoffset="251.2" stroke-linecap="round"
-              transform="rotate(-90 50 50)" style="transition:stroke-dashoffset 1.6s ease;"/>
-            <text x="50" y="46" class="score-ring-val" id="scoreRingVal">0</text>
-            <text x="50" y="64" class="score-ring-label">SCORE</text>
-          </svg>
-          <div style="font-family:var(--mono);font-size:8px;color:var(--muted);letter-spacing:2px;margin-top:2px">COMPOSITE</div>
-        </div>
-        <!-- Sentiment Gauge -->
-        <div class="gauge-wrap" id="gaugeWrap" style="display:none">
-          <svg width="120" height="70" viewBox="0 0 200 110" class="gauge-svg">
-            <!-- Gauge arcs -->
-            <path d="M 20 90 A 80 80 0 0 1 100 10" fill="none" stroke="#ff3d57" stroke-width="12" stroke-linecap="round" opacity="0.5"/>
-            <path d="M 100 10 A 80 80 0 0 1 180 90" fill="none" stroke="#00e676" stroke-width="12" stroke-linecap="round" opacity="0.5"/>
-            <!-- Needle -->
-            <g id="gaugeNeedle" class="gauge-needle">
-              <line x1="100" y1="90" x2="100" y2="20" stroke="#f0b429" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="100" cy="90" r="6" fill="#f0b429"/>
-            </g>
-            <text x="100" y="75" class="gauge-val" id="gaugeSentText" style="font-size:18px">—</text>
-            <text x="100" y="102" class="gauge-label">SENTIMENT</text>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Score Breakdown -->
-    <div class="score-breakdown">
-      <div class="score-item">
-        <div class="score-item-label">Tweet/News</div>
-        <div class="score-bar-wrap">
-          <div class="score-bar-bg"><div class="score-bar-fill" id="barTweet" style="background:var(--cyan)"></div></div>
-          <div class="score-num" id="numTweet" style="color:var(--cyan)">0</div>
-        </div>
-      </div>
-      <div class="score-item">
-        <div class="score-item-label">Technical</div>
-        <div class="score-bar-wrap">
-          <div class="score-bar-bg"><div class="score-bar-fill" id="barTech" style="background:var(--gold)"></div></div>
-          <div class="score-num" id="numTech" style="color:var(--gold)">0</div>
-        </div>
-      </div>
-      <div class="score-item">
-        <div class="score-item-label">Pattern</div>
-        <div class="score-bar-wrap">
-          <div class="score-bar-bg"><div class="score-bar-fill" id="barPattern" style="background:var(--purple)"></div></div>
-          <div class="score-num" id="numPattern" style="color:var(--purple)">0</div>
-        </div>
-      </div>
-      <div class="score-item">
-        <div class="score-item-label">Structure</div>
-        <div class="score-bar-wrap">
-          <div class="score-bar-bg"><div class="score-bar-fill" id="barStruct" style="background:var(--green)"></div></div>
-          <div class="score-num" id="numStruct" style="color:var(--green)">0</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MTF Result -->
-  <div class="card" id="mtfResultCard">
-    <div class="card-title">// Multi-Timeframe Confluence</div>
-    <div class="mtf-result-grid" id="mtfResultGrid"></div>
-    <div id="mtfAlignMsg" style="font-family:var(--mono);font-size:11px;padding:8px 12px;border-radius:6px;"></div>
-  </div>
-
-  <!-- Asset Impact -->
-  <div class="card">
-    <div class="card-title">// Dampak Per Aset</div>
-    <div class="asset-row" id="assetRow"></div>
-  </div>
-
-  <!-- Analysis Grid -->
-  <div class="analysis-grid" id="analysisGrid">
-    <div class="analysis-box">
-      <div class="analysis-box-title">// Analisis Tweet / Berita</div>
-      <p id="tweetAnalysisText">—</p>
-    </div>
-    <div class="analysis-box">
-      <div class="analysis-box-title">// Analisis Teknikal</div>
-      <p id="techAnalysisText">—</p>
-    </div>
-    <div class="analysis-box">
-      <div class="analysis-box-title">// Analisis Pola Candlestick</div>
-      <p id="patternAnalysisText">—</p>
-    </div>
-    <div class="analysis-box">
-      <div class="analysis-box-title">// Market Structure (ICT/SMC)</div>
-      <p id="structAnalysisText">—</p>
-    </div>
-  </div>
-
-  <!-- Risk -->
-  <div class="card">
-    <div class="card-title">// Risk Assessment</div>
-    <div style="display:flex;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
-      <span style="font-family:var(--mono);font-size:10px;color:var(--muted)">RISK LEVEL</span>
-      <span style="font-family:var(--mono);font-size:12px;font-weight:700" id="riskLabel">—</span>
-    </div>
-    <div class="risk-row">
-      <div class="risk-bg"><div class="risk-fill" id="riskFill" style="width:0%"></div></div>
-      <div class="risk-score" id="riskScore">0/10</div>
-    </div>
-    <div id="riskFactors" style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px"></div>
-  </div>
-
-  <!-- Entry Strategy -->
-  <div class="strategy-box">
-    <div class="strategy-title">// Strategi Entry yang Disarankan</div>
-    <div class="strategy-grid" id="strategyGrid"></div>
-  </div>
-
-  <!-- Market Structure Result -->
-  <div class="card" id="structResultCard">
-    <div class="card-title">// Ringkasan Market Structure</div>
-    <div id="structResultList"></div>
-  </div>
-
-  <!-- Confirmation Checklist -->
-  <div class="card">
-    <div class="card-title">// Konfirmasi Sebelum Entry (Checklist)</div>
-    <div class="checklist" id="checklist"></div>
-  </div>
-
-  <!-- AI Narrative -->
-  <div class="narrative-box">
-    <div class="card-title" style="margin-bottom:14px">// NEXUS PRO — AI Narrative & Conclusion</div>
-    <p class="narrative-text" id="aiNarrative">—</p>
-  </div>
-
-  <!-- Vision Result (if chart uploaded) -->
-  <div class="card" id="visionResultCard" style="display:none">
-    <div class="card-title">// Chart Vision Analysis (AI Visual)</div>
-    <p style="font-size:12px;line-height:1.7;color:var(--text2)" id="visionAnalysisText">—</p>
-  </div>
-
-  <!-- Disclaimer -->
-  <div class="disclaimer">
-    <strong>⚠ DISCLAIMER PENTING</strong>
-    Analisis NEXUS PRO bersifat edukatif dan informatif semata. BUKAN merupakan rekomendasi investasi atau financial advice. Pasar crypto, forex, dan komoditas sangat volatil dan tidak dapat diprediksi dengan pasti. Selalu terapkan manajemen risiko yang baik: pasang stop loss, diversifikasi posisi, dan investasikan hanya dana yang siap kamu rugikan. Past performance is not indicative of future results. DYOR.
-  </div>
-
-  <div class="export-row">
-    <button class="btn btn-ghost" onclick="goTab(0)">↺ Analisis Baru</button>
-    <button class="btn btn-purple" onclick="exportReport()">📄 Export Laporan JSON</button>
-    <button class="btn btn-ghost" onclick="copyReport()">📋 Copy Ringkasan</button>
-  </div>
-
-  <!-- History -->
-  <div class="history-wrap" id="historyWrap" style="display:none">
-    <div class="history-hdr">
-      <span class="history-hdr-title">// Riwayat Analisis</span>
-      <div style="display:flex;gap:8px">
-        <button class="btn btn-ghost" style="padding:5px 12px;font-size:10px" onclick="clearHistory()">CLEAR ALL</button>
-      </div>
-    </div>
-    <div id="historyItems"></div>
-  </div>
-
-</div><!-- end panel4 -->
-
-</div><!-- end wrap -->
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════════════════
-const state = {
-  influencer: 'Donald Trump',
-  influencerPower: 10,
-  tweet: '',
-  assets: ['BTC/USDT','ETH/USDT','XAU/USD'],
-  trend: 'uptrend',
-  ma: 'above',
-  htfTrend: 'uptrend',
-  mtfTrend: 'uptrend',
-  ltfTrend: 'uptrend',
-  tf: '1h',
-  mainAsset: 'BTC/USDT',
-  volume: 'normal',
-  rsi: 'neutral',
-  macd: 'bullish',
-  bb: 'middle',
-  stoch: 'neutral',
-  adx: 'strong',
-  ichimoku: 'n_a',
-  fib: 'at_500',
-  ma2050: 'above',
-  ema200: 'above',
-  trendType: 'strong',
-  patterns: [],
-  patternScore: 0,
-  marketSent: 'neutral',
-  btcDom: 'stable',
-  oi: 'normal',
-  funding: 'neutral',
-  structSelections: [],
-  orderBlock: 'bullish_ob',
-  fvg: 'bullish_fvg',
-  liquidity: 'none',
-  premDisc: 'equilibrium',
-  priceStruct: 'hh_hl',
-  priceCurrent: '', priceSupport: '', priceResist: '',
-  priceSupportMaj: '', priceResistMaj: '', priceSL: '',
-  swingHigh: '', swingLow: '',
-  additionalNotes: '',
-  chartImageData: null,
-  chartMode: 'upload',
-  lastResult: null
-};
+// ── STATE ──
+let currentImageBase64 = null;
+let history = JSON.parse(localStorage.getItem('nexus_history') || '[]');
 
-let historyData = [];
-try { historyData = JSON.parse(localStorage.getItem('nexus_pro_history') || '[]'); } catch(e) {}
+// ── UPLOAD HANDLING ──
+const zone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
 
-let currentTab = 0;
-
-// ═══════════════════════════════════════════════════════
-//  UI HANDLERS
-// ═══════════════════════════════════════════════════════
-document.getElementById('tweetInput').addEventListener('input', function() {
-  document.getElementById('charCount').textContent = this.value.length + '/1200';
-  state.tweet = this.value;
+zone.addEventListener('click', e => {
+  if (!e.target.closest('.btn-icon')) fileInput.click();
 });
 
-function goTab(n) {
-  document.querySelectorAll('.panel').forEach((p,i) => p.classList.toggle('active', i===n));
-  document.querySelectorAll('.step-tab').forEach((t,i) => t.classList.toggle('active', i===n));
-  currentTab = n;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  // Mark done
-  if (n > 0) for (let i=0;i<n;i++) document.getElementById('tab'+i)?.classList.add('done');
-}
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('drag'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) loadImage(file);
+});
 
-function selectInf(el, name, power) {
-  document.querySelectorAll('.inf-chip').forEach(c => c.classList.remove('active'));
-  el.classList.add('active');
-  state.influencer = name;
-  state.influencerPower = parseInt(power);
-  document.getElementById('selInfLabel').textContent = name;
-  document.getElementById('selInfPower').textContent = power;
-}
+fileInput.addEventListener('change', e => {
+  if (e.target.files[0]) loadImage(e.target.files[0]);
+});
 
-function setCustomInf() {
-  const name = document.getElementById('customInfName').value.trim();
-  const power = document.getElementById('customInfPower').value;
-  if (!name) return;
-  document.querySelectorAll('.inf-chip').forEach(c => c.classList.remove('active'));
-  state.influencer = name;
-  state.influencerPower = parseInt(power);
-  document.getElementById('selInfLabel').textContent = name;
-  document.getElementById('selInfPower').textContent = power;
-  document.getElementById('customInfName').value = '';
-}
-
-function selectSeg(el, group, val) {
-  el.closest('.seg-group').querySelectorAll('.seg-btn').forEach(b => b.classList.remove('active'));
-  el.classList.add('active');
-  state[group] = val;
-}
-
-function setSubTab(id, el) {
-  el.closest('.sub-tabs').querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  el.closest('.card').querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-function setChartMode(mode, el) {
-  document.querySelectorAll('.chart-mode-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  document.querySelectorAll('.chart-mode-content').forEach(c => c.classList.remove('active'));
-  document.getElementById('chartMode' + (mode === 'upload' ? 'Upload' : 'Manual')).classList.add('active');
-  state.chartMode = mode;
-  if (mode === 'manual') state.chartImageData = null;
-}
-
-function togglePattern(el, id, score) {
-  const already = el.classList.contains('selected');
-  if (already) {
-    el.classList.remove('selected');
-    state.patterns = state.patterns.filter(p => p.id !== id);
-    state.patternScore -= parseFloat(score);
-  } else {
-    el.classList.add('selected');
-    state.patterns.push({ id, score: parseFloat(score) });
-    state.patternScore += parseFloat(score);
-  }
-  updatePatternUI();
-}
-
-function updatePatternUI() {
-  const count = state.patterns.length;
-  document.getElementById('patternCount').textContent = count;
-  const bias = state.patternScore > 1 ? 'BULLISH' : state.patternScore < -1 ? 'BEARISH' : 'NEUTRAL';
-  const biasEl = document.getElementById('patternBias');
-  biasEl.textContent = bias;
-  biasEl.style.color = bias === 'BULLISH' ? 'var(--green)' : bias === 'BEARISH' ? 'var(--red)' : 'var(--cyan)';
-}
-
-function clearPatterns() {
-  state.patterns = [];
-  state.patternScore = 0;
-  document.querySelectorAll('.pattern-chip').forEach(c => c.classList.remove('selected'));
-  updatePatternUI();
-}
-
-function toggleStruct(el, id) {
-  const already = el.classList.contains('active');
-  if (already) {
-    el.classList.remove('active');
-    state.structSelections = state.structSelections.filter(s => s !== id);
-  } else {
-    el.classList.add('active');
-    state.structSelections.push(id);
-  }
-}
-
-function clearTweet() {
-  document.getElementById('tweetInput').value = '';
-  document.getElementById('charCount').textContent = '0/1200';
-  state.tweet = '';
-}
-
-function pasteSample() {
-  const samples = [
-    "Just bought more Bitcoin for MicroStrategy. The future is digital. 🚀 #BTC",
-    "The Federal Reserve will maintain current interest rates. No cuts expected this quarter.",
-    "Dogecoin to the moon! 🐕 Who's with me? Buy the dip! #DOGE",
-    "SEC approves another Bitcoin ETF. This is huge for institutional adoption.",
-    "Market correction incoming. I'm reducing crypto exposure by 30%. Be careful out there."
-  ];
-  const s = samples[Math.floor(Math.random()*samples.length)];
-  document.getElementById('tweetInput').value = s;
-  document.getElementById('charCount').textContent = s.length + '/1200';
-  state.tweet = s;
-}
-
-// Chart Upload
-function handleChartUpload(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  if (file.size > 5 * 1024 * 1024) { alert('File terlalu besar. Max 5MB.'); return; }
-
+function loadImage(file) {
   const reader = new FileReader();
-  reader.onload = function(ev) {
-    state.chartImageData = ev.target.result; // base64 data URL
-    document.getElementById('chartPreview').src = state.chartImageData;
-    document.getElementById('chartPreview').style.display = 'block';
-    document.getElementById('chartUploadedMsg').style.display = 'block';
+  reader.onload = ev => {
+    const dataUrl = ev.target.result;
+    currentImageBase64 = dataUrl.split(',')[1];
+    document.getElementById('previewImg').src = dataUrl;
+    document.getElementById('uploadPrompt').style.display = 'none';
+    document.getElementById('previewWrap').classList.add('show');
+    hideError();
   };
   reader.readAsDataURL(file);
 }
 
-// Drag & drop
-const uploadZone = document.getElementById('uploadZone');
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
-uploadZone.addEventListener('drop', e => {
-  e.preventDefault();
-  uploadZone.classList.remove('drag-over');
-  const file = e.dataTransfer.files[0];
-  if (file && file.type.startsWith('image/')) {
-    const dt = new DataTransfer();
-    dt.items.add(file);
-    document.getElementById('chartFile').files = dt.files;
-    handleChartUpload({ target: { files: [file] } });
-  }
-});
-
-// ═══════════════════════════════════════════════════════
-//  SCORING
-// ═══════════════════════════════════════════════════════
-function computeTechScore() {
-  let score = 50;
-
-  if (state.trend === 'uptrend') score += 12;
-  else if (state.trend === 'downtrend') score -= 12;
-  else score -= 3;
-
-  if (state.ma === 'above') score += 8;
-  else if (state.ma === 'below') score -= 8;
-
-  // MA alignment
-  if (state.ma2050 === 'golden') score += 10;
-  else if (state.ma2050 === 'above') score += 5;
-  else if (state.ma2050 === 'death') score -= 10;
-  else if (state.ma2050 === 'below') score -= 5;
-
-  if (state.ema200 === 'above') score += 6;
-  else if (state.ema200 === 'below') score -= 6;
-
-  // MTF alignment
-  const trends = [state.htfTrend, state.mtfTrend, state.ltfTrend];
-  const up = trends.filter(t => t === 'uptrend').length;
-  const down = trends.filter(t => t === 'downtrend').length;
-  if (up === 3) score += 15;
-  else if (up === 2) score += 8;
-  else if (down === 3) score -= 15;
-  else if (down === 2) score -= 8;
-
-  // Volume
-  if (state.volume === 'high_bullish') score += 10;
-  else if (state.volume === 'high_bearish') score -= 10;
-  else if (state.volume === 'low' || state.volume === 'declining') score -= 5;
-  else if (state.volume === 'dry') score -= 8;
-
-  // RSI
-  const rsiMap = { overbought_extreme:-15, overbought:-10, high:5, neutral:0, low:-5, oversold:10, oversold_extreme:14 };
-  score += (rsiMap[state.rsi] || 0);
-
-  // MACD
-  const macdMap = { bullish_cross:12, bullish:6, neutral_above:3, neutral_below:-3, bearish:-6, death_cross:-12, divergence_bull:10, divergence_bear:-10 };
-  score += (macdMap[state.macd] || 0);
-
-  // BB
-  const bbMap = { squeeze:5, upper_touch:-5, upper_break:-8, middle:0, lower_touch:6, lower_break:-8, expansion:0, walking_up:8 };
-  score += (bbMap[state.bb] || 0);
-
-  // Stochastic
-  if (state.stoch === 'oversold') score += 8;
-  else if (state.stoch === 'bullish_cross') score += 12;
-  else if (state.stoch === 'overbought') score -= 8;
-  else if (state.stoch === 'bearish_cross') score -= 12;
-
-  // ADX
-  if (state.adx === 'very_strong') score += 5;
-  else if (state.adx === 'strong') score += 3;
-  else if (state.adx === 'very_weak') score -= 3;
-
-  // Fib
-  const fibMap = { above_786:8, at_618:10, at_500:5, at_382:3, at_236:2, below_786:-8, n_a:0 };
-  score += (fibMap[state.fib] || 0);
-
-  // Market sentiment
-  const sentMap = { extreme_greed:3, greed:6, neutral:0, fear:-4, extreme_fear:8 };
-  score += (sentMap[state.marketSent] || 0);
-
-  // BTC Dom
-  const domMap = { rising_high:-8, rising:-4, stable:0, falling:5, falling_fast:8 };
-  score += (domMap[state.btcDom] || 0);
-
-  // OI + Funding
-  if (state.oi === 'rising_price_rising') score += 7;
-  else if (state.oi === 'rising_price_falling') score -= 7;
-  if (state.funding === 'very_negative') score += 8;
-  else if (state.funding === 'negative') score += 4;
-  else if (state.funding === 'very_positive') score -= 8;
-  else if (state.funding === 'positive') score -= 4;
-
-  return Math.max(0, Math.min(100, Math.round(score)));
+function clearImage(e) {
+  e.stopPropagation();
+  currentImageBase64 = null;
+  fileInput.value = '';
+  document.getElementById('previewImg').src = '';
+  document.getElementById('uploadPrompt').style.display = 'block';
+  document.getElementById('previewWrap').classList.remove('show');
 }
 
-function computePatternScore() {
-  if (state.patterns.length === 0) return 50;
-  return Math.max(0, Math.min(100, Math.round(50 + (state.patternScore * 4.5))));
-}
+// ── ANALYZE ──
+async function analyze() {
+  if (!currentImageBase64) { showError('⚠ Upload screenshot chart terlebih dahulu.'); return; }
 
-function computeStructScore() {
-  let score = 50;
-  if (state.structSelections.includes('bos_bullish')) score += 15;
-  if (state.structSelections.includes('choch_bullish')) score += 18;
-  if (state.structSelections.includes('bos_bearish')) score -= 15;
-  if (state.structSelections.includes('choch_bearish')) score -= 18;
-  if (state.orderBlock === 'bullish_ob') score += 8;
-  else if (state.orderBlock === 'bearish_ob') score -= 8;
-  if (state.fvg === 'bullish_fvg') score += 5;
-  else if (state.fvg === 'bearish_fvg') score -= 5;
-  if (state.priceStruct === 'hh_hl') score += 8;
-  else if (state.priceStruct === 'lh_ll') score -= 8;
-  if (state.premDisc === 'discount') score += 10;
-  else if (state.premDisc === 'premium') score -= 10;
-  return Math.max(0, Math.min(100, Math.round(score)));
-}
+  const asset = document.getElementById('assetInput').value.trim() || 'Unknown';
+  const tf = document.getElementById('tfSelect').value || 'Unknown';
 
-// ═══════════════════════════════════════════════════════
-//  LOADING MESSAGES
-// ═══════════════════════════════════════════════════════
-const loadMsgs = [
-  'Menganalisis sentimen tweet & influencer...',
-  'Memproses sinyal teknikal multi-indikator...',
-  'Mengevaluasi pola candlestick & chart...',
-  'Menganalisis market structure ICT/SMC...',
-  'Menghitung MTF confluence...',
-  'Membangun strategi entry/exit...',
-  'Menghitung composite score & risk...',
-  state.chartImageData ? 'AI Vision menganalisis chart image...' : 'Finalisasi laporan NEXUS PRO...',
-];
-
-let loadInterval;
-
-function startLoadMsgs() {
-  let i = 0;
-  document.getElementById('loadMsg').textContent = loadMsgs[0];
-  loadInterval = setInterval(() => {
-    i = (i+1) % loadMsgs.length;
-    document.getElementById('loadMsg').textContent = loadMsgs[i];
-  }, 1200);
-}
-
-// ═══════════════════════════════════════════════════════
-//  RUN ANALYSIS
-// ═══════════════════════════════════════════════════════
-async function runAnalysis() {
-  // Sync all state
-  state.tf = document.getElementById('selTF').value;
-  state.mainAsset = document.getElementById('selAsset').value;
-  state.volume = document.getElementById('selVolume').value;
-  state.rsi = document.getElementById('selRSI').value;
-  state.macd = document.getElementById('selMACD').value;
-  state.bb = document.getElementById('selBB').value;
-  state.stoch = document.getElementById('selStoch').value;
-  state.adx = document.getElementById('selADX').value;
-  state.ichimoku = document.getElementById('selIchimoku').value;
-  state.fib = document.getElementById('selFib').value;
-  state.ma2050 = document.getElementById('selMA2050').value;
-  state.ema200 = document.getElementById('selEMA200').value;
-  state.trendType = document.getElementById('selTrendType').value;
-  state.marketSent = document.getElementById('selMarketSent').value;
-  state.btcDom = document.getElementById('selBTCDom').value;
-  state.oi = document.getElementById('selOI').value;
-  state.funding = document.getElementById('selFunding').value;
-  state.liquidity = document.getElementById('selLiquidity').value;
-  state.premDisc = document.getElementById('selPremDisc').value;
-  state.priceCurrent = document.getElementById('priceCurrent').value;
-  state.priceSupport = document.getElementById('priceSupport').value;
-  state.priceResist = document.getElementById('priceResist').value;
-  state.priceSupportMaj = document.getElementById('priceSupportMaj').value;
-  state.priceResistMaj = document.getElementById('priceResistMaj').value;
-  state.priceSL = document.getElementById('priceSL').value;
-  state.swingHigh = document.getElementById('swingHigh').value;
-  state.swingLow = document.getElementById('swingLow').value;
-  state.additionalNotes = document.getElementById('additionalNotes').value;
-  state.tweet = document.getElementById('tweetInput').value.trim();
-
-  const assetList = ['BTC','ETH','XAU','SOL','DOGE','BNB','XRP','DXY']
-    .filter(a => document.getElementById('chk'+a)?.checked)
-    .map(a => a === 'DXY' ? 'DXY/USD' : a + '/USDT')
-    .map(a => a === 'XAU/USDT' ? 'XAU/USD' : a);
-
-  if (!state.tweet) { showError('⚠ Harap isi tweet / statement di Step 01 terlebih dahulu.'); return; }
-
-  const techScore = computeTechScore();
-  const patternScore = computePatternScore();
-  const structScore = computeStructScore();
-  const patternNames = state.patterns.map(p => p.id.replace(/_/g,' ')).join(', ') || 'tidak ada';
-  const structList = state.structSelections.join(', ') || 'tidak ada';
-
-  const btn = document.getElementById('runBtn');
+  const btn = document.getElementById('analyzeBtn');
   btn.disabled = true;
   document.getElementById('loadingBar').classList.add('show');
-  document.getElementById('errorBox').classList.remove('show');
-  startLoadMsgs();
+  document.getElementById('loadingText').classList.add('show');
+  document.getElementById('resultSection').classList.remove('show');
+  hideError();
 
-  // Build messages for API
-  const systemPrompt = `Kamu adalah NEXUS PRO, sistem AI analisis trading kelas institusional dengan kemampuan analisis 5-layer: Tweet/News Sentiment, Technical Analysis, Candlestick Pattern, Market Structure (ICT/SMC), dan Chart Vision. Berikan analisis mendalam dan actionable.`;
+  const prompt = `Kamu adalah analis teknikal profesional level institutional dengan pengalaman 15 tahun di pasar forex, crypto, dan komoditas.
 
-  const userContent = [];
+Analisis screenshot chart berikut secara SANGAT DETAIL dan PRESISI.
 
-  // If chart image is uploaded, include it
-  if (state.chartImageData && state.chartMode === 'upload') {
-    const base64 = state.chartImageData.split(',')[1];
-    const mime = state.chartImageData.split(';')[0].split(':')[1];
-    userContent.push({
-      type: 'image',
-      source: { type: 'base64', media_type: mime, data: base64 }
-    });
-  }
+Asset: ${asset}
+Timeframe: ${tf}
 
-  const textPrompt = `ANALISIS TRADING NEXUS PRO — DATA LENGKAP:
+Berikan analisis komprehensif mencakup:
+1. TREND UTAMA: arah (bullish/bearish/sideways), kekuatan, struktur HH/HL/LH/LL
+2. CANDLESTICK PATTERNS: semua pola yang teridentifikasi (nama, lokasi, bullish/bearish)
+3. SUPPORT & RESISTANCE: minimal 2 support dan 2 resistance dengan harga perkiraan dan kekuatan (strong/medium/weak)
+4. MOMENTUM: estimasi visual RSI (overbought/oversold/netral, nilai perkiraan), MACD (bullish/bearish cross, histogram), volume jika terlihat
+5. MARKET STRUCTURE: apakah ada BOS (Break of Structure), CHoCH (Change of Character), tipe struktur (HH/HL, LH/LL)
+6. ENTRY OPPORTUNITY: zona entry terbaik, dengan alasan, termasuk konfirmasi yang dibutuhkan
+7. RISK ASSESSMENT: level risiko 1-10 dengan alasan
 
-LAYER 1 — TWEET/NEWS:
-- Influencer: ${state.influencer} (Market Power: ${state.influencerPower}/10)
-- Statement/Tweet: "${state.tweet}"
-
-LAYER 2 — TECHNICAL:
-- Asset Utama: ${state.mainAsset} | Timeframe: ${state.tf}
-- Trend Utama: ${state.trend} (${state.trendType})
-- HTF Trend (${document.getElementById('selHTF').value}): ${state.htfTrend}
-- MTF Trend (${document.getElementById('selMTF').value}): ${state.mtfTrend}
-- LTF Trend (${document.getElementById('selLTF').value}): ${state.ltfTrend}
-- Posisi vs MA: ${state.ma} | MA20/MA50: ${state.ma2050} | EMA200: ${state.ema200}
-- Volume: ${state.volume} | RSI(14): ${state.rsi} | MACD: ${state.macd}
-- Bollinger Bands: ${state.bb} | Stochastic: ${state.stoch} | ADX: ${state.adx}
-- Ichimoku: ${state.ichimoku} | Fibonacci: ${state.fib}
-- Harga Saat Ini: ${state.priceCurrent||'N/A'} | Support: ${state.priceSupport||'N/A'} | Resist: ${state.priceResist||'N/A'}
-- Support Major: ${state.priceSupportMaj||'N/A'} | Resist Major: ${state.priceResistMaj||'N/A'}
-- Swing High: ${state.swingHigh||'N/A'} | Swing Low: ${state.swingLow||'N/A'}
-- Fear & Greed: ${state.marketSent} | BTC Dom: ${state.btcDom}
-- Open Interest: ${state.oi} | Funding Rate: ${state.funding}
-
-LAYER 3 — PATTERN:
-- Pola Candlestick: ${patternNames}
-- Pattern Score (pre-computed): ${patternScore}/100
-
-LAYER 4 — MARKET STRUCTURE (ICT/SMC):
-- BOS/CHoCH: ${structList}
-- Order Block: ${state.orderBlock} | FVG: ${state.fvg}
-- Liquidity: ${state.liquidity} | Premium/Discount: ${state.premDisc}
-- Price Structure: ${state.priceStruct}
-
-SCORES (pre-computed):
-- Technical Score: ${techScore}/100
-- Pattern Score: ${patternScore}/100
-- Structure Score: ${structScore}/100
-
-ASET TARGET: ${assetList.join(', ')||state.mainAsset}
-${state.additionalNotes ? 'CATATAN TAMBAHAN: ' + state.additionalNotes : ''}
-${state.chartImageData ? 'CHART IMAGE: Gambar chart telah diunggah. Analisis secara visual dan sebutkan observasi chart vision di field "vision_analysis".' : ''}
-
-Berikan respons HANYA dalam format JSON ini (tanpa teks lain, tanpa markdown, tanpa backtick):
+Jawab HANYA dalam format JSON berikut (tanpa teks lain, tanpa markdown fence):
 {
-  "tweet_score": 0-100,
-  "tweet_sentiment": "BULLISH" | "BEARISH" | "NEUTRAL",
-  "tweet_analysis": "2-3 kalimat Bahasa Indonesia tentang dampak statement/tweet ini ke market",
-  "composite_score": 0-100,
-  "signal": "STRONG BUY" | "BUY" | "WAIT" | "NEUTRAL" | "AVOID",
-  "signal_subtitle": "1 kalimat penjelasan singkat dan tajam tentang signal ini",
-  "assets": [
-    {
-      "symbol": "BTC",
-      "pair": "BTC/USDT",
-      "direction": "up" | "down" | "neutral",
-      "impact": "+Tinggi" | "+Sedang" | "+Rendah" | "-Tinggi" | "-Sedang" | "-Rendah" | "Netral",
-      "reason": "alasan 1 kalimat",
-      "confidence": 0-100,
-      "price_target": "level target atau 'N/A'"
-    }
-  ],
-  "mtf_analysis": {
-    "htf": { "trend": "BULLISH/BEARISH/SIDEWAYS", "desc": "1 kalimat" },
-    "mtf": { "trend": "BULLISH/BEARISH/SIDEWAYS", "desc": "1 kalimat" },
-    "ltf": { "trend": "BULLISH/BEARISH/SIDEWAYS", "desc": "1 kalimat" },
-    "confluence": "FULL ALIGN" | "PARTIAL" | "CONFLICTING",
-    "confluence_note": "Penjelasan alignment MTF"
+  "signal": "STRONG BUY" | "BUY" | "WAIT" | "SELL" | "STRONG SELL",
+  "signal_score": 0-100,
+  "trend_direction": "BULLISH" | "BEARISH" | "SIDEWAYS",
+  "trend_label": "nama trend singkat misal 'Uptrend Kuat' atau 'Reversal Zone'",
+  "trend_desc": "deskripsi 1-2 kalimat tentang kondisi trend saat ini",
+  "structure": {
+    "tags": ["HH", "HL"] atau ["LH", "LL"] atau ["BOS"] atau ["CHoCH"] dll (array string),
+    "desc": "penjelasan market structure 2-3 kalimat"
   },
-  "tech_analysis": "2-3 kalimat analisis teknikal mendalam",
-  "pattern_analysis": "2-3 kalimat analisis pola candlestick",
-  "structure_analysis": "2-3 kalimat analisis market structure ICT/SMC",
-  "risk_level": 1-10,
-  "risk_label": "LOW" | "MEDIUM" | "HIGH" | "EXTREME",
-  "risk_color": "#00e676" | "#f0b429" | "#ff9100" | "#ff3d57",
-  "risk_factors": ["faktor risiko 1", "faktor risiko 2", "faktor risiko 3"],
+  "patterns": [
+    {"name": "nama pola", "type": "bull" | "bear" | "neutral", "note": "keterangan singkat lokasi/implikasi"}
+  ],
+  "levels": [
+    {"type": "R", "price": "harga atau range misal 1950.00", "strength": "STRONG" | "MEDIUM" | "WEAK", "strength_pct": 60-100},
+    {"type": "R", "price": "...", "strength": "...", "strength_pct": 0-100},
+    {"type": "S", "price": "...", "strength": "...", "strength_pct": 0-100},
+    {"type": "S", "price": "...", "strength": "...", "strength_pct": 0-100}
+  ],
+  "momentum": {
+    "rsi_est": 0-100,
+    "rsi_label": "OVERBOUGHT" | "OVERSOLD" | "NEUTRAL" | "BULLISH" | "BEARISH",
+    "rsi_note": "keterangan singkat",
+    "macd_label": "BULLISH CROSS" | "BEARISH CROSS" | "BULLISH" | "BEARISH" | "NEUTRAL",
+    "macd_note": "keterangan singkat",
+    "volume_label": "HIGH" | "LOW" | "AVERAGE" | "NOT VISIBLE",
+    "volume_note": "keterangan singkat"
+  },
   "entry_strategy": {
-    "action": "BUY" | "SELL" | "WAIT" | "AVOID",
-    "entry_zone": "harga atau zona entry spesifik",
-    "take_profit_1": "TP1 dengan level atau alasan",
-    "take_profit_2": "TP2 dengan level atau alasan",
-    "stop_loss": "level stop loss dan alasan",
-    "risk_reward": "rasio R:R misal 1:2.5",
-    "position_size": "saran ukuran posisi misal '2-3% portofolio'",
-    "timing": "kapan entry ideal, contoh: 'Setelah konfirmasi close candle'"
+    "action": "BUY" | "SELL" | "WAIT",
+    "entry_zone": "harga atau zona entry",
+    "take_profit": "target TP",
+    "stop_loss": "level SL",
+    "risk_reward": "rasio misal 1:2.5",
+    "confirmation": "konfirmasi yang dibutuhkan sebelum entry"
   },
-  "structure_summary": [
-    { "type": "BOS/CHoCH/OB/FVG/dll", "direction": "BULLISH/BEARISH", "desc": "penjelasan singkat", "icon": "emoji" }
-  ],
+  "risk": {
+    "level": 1-10,
+    "label": "LOW" | "MEDIUM" | "HIGH" | "EXTREME",
+    "color": "#00e676" | "#f0b429" | "#ff9100" | "#ff3d57",
+    "desc": "penjelasan risiko 1-2 kalimat"
+  },
   "checklist": [
-    { "label": "konfirmasi 1", "status": "pass" | "fail" | "warn", "note": "penjelasan" },
-    { "label": "konfirmasi 2", "status": "pass" | "fail" | "warn", "note": "penjelasan" },
-    { "label": "konfirmasi 3", "status": "pass" | "fail" | "warn", "note": "penjelasan" },
-    { "label": "konfirmasi 4", "status": "pass" | "fail" | "warn", "note": "penjelasan" },
-    { "label": "konfirmasi 5", "status": "pass" | "fail" | "warn", "note": "penjelasan" },
-    { "label": "konfirmasi 6", "status": "pass" | "fail" | "warn", "note": "penjelasan" }
+    {"label": "Trend Confirmation", "status": "pass" | "warn" | "fail", "note": "keterangan"},
+    {"label": "Key Level Proximity", "status": "pass" | "warn" | "fail", "note": "keterangan"},
+    {"label": "Pattern Signal", "status": "pass" | "warn" | "fail", "note": "keterangan"},
+    {"label": "Momentum Aligned", "status": "pass" | "warn" | "fail", "note": "keterangan"},
+    {"label": "Risk/Reward Valid", "status": "pass" | "warn" | "fail", "note": "keterangan"}
   ],
-  "vision_analysis": "Jika chart image diberikan: analisis visual chart secara detail meliputi pola, S/R visual, momentum. Jika tidak: null",
-  "narrative": "4-5 kalimat narasi komprehensif Bahasa Indonesia yang menggabungkan semua 5 layer analisis, menjelaskan kenapa signal ini direkomendasikan, apa yang harus diwaspadai, dan action plan konkret"
+  "narrative": "3-4 kalimat narasi komprehensif Bahasa Indonesia yang menggabungkan semua aspek analisis — trend, structure, pattern, momentum, dan rekomendasi entry yang jelas."
 }`;
-
-  userContent.push({ type: 'text', text: textPrompt });
 
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
@@ -3099,312 +1070,216 @@ Berikan respons HANYA dalam format JSON ini (tanpa teks lain, tanpa markdown, ta
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 2000,
-        system: systemPrompt,
-        messages: [{ role: 'user', content: userContent }]
+        max_tokens: 1500,
+        messages: [{
+          role: 'user',
+          content: [
+            {
+              type: 'image',
+              source: { type: 'base64', media_type: 'image/jpeg', data: currentImageBase64 }
+            },
+            { type: 'text', text: prompt }
+          ]
+        }]
       })
     });
 
     const data = await res.json();
-    const raw = data.content?.map(i => i.text || '').join('') || '';
+    const raw = data.content?.[0]?.text || '';
 
     let json;
     try {
-      json = JSON.parse(raw.replace(/```json|```/g,'').trim());
+      json = JSON.parse(raw.replace(/```json|```/g, '').trim());
     } catch {
-      throw new Error('Format AI tidak valid. Coba lagi.');
+      throw new Error('Format AI tidak valid. Silakan coba lagi.');
     }
 
-    // Override with computed scores
-    json.tech_score = techScore;
-    json.pattern_score = patternScore;
-    json.struct_score = structScore;
-
-    state.lastResult = json;
-    renderResult(json, assetList);
-    saveHistory(state.tweet, json);
-    goTab(4);
+    renderResult(json, asset, tf);
+    saveHistory(json, asset, tf);
 
   } catch(err) {
-    showError('⚠ Error: ' + (err.message || 'Gagal terhubung ke AI. Cek koneksi.'));
+    showError('⚠ ' + (err.message || 'Gagal terhubung ke AI.'));
   } finally {
     btn.disabled = false;
     document.getElementById('loadingBar').classList.remove('show');
-    clearInterval(loadInterval);
+    document.getElementById('loadingText').classList.remove('show');
   }
 }
 
-// ═══════════════════════════════════════════════════════
-//  RENDER RESULT
-// ═══════════════════════════════════════════════════════
-function renderResult(d, assetList) {
-  const signalClass = (d.signal||'wait').toLowerCase().replace(' ','-');
-
-  const signalIcons = { 'STRONG BUY':'🚀', 'BUY':'📈', 'WAIT':'⏳', 'AVOID':'🚫', 'NEUTRAL':'⚖️' };
-  document.getElementById('signalIcon').textContent = signalIcons[d.signal] || '⚡';
-  document.getElementById('signalIcon').className = 'signal-icon ' + signalClass;
-  document.getElementById('signalValue').textContent = d.signal || '—';
-  document.getElementById('signalValue').className = 'signal-value ' + signalClass;
-  document.getElementById('signalSub').textContent = d.signal_subtitle || '';
+// ── RENDER ──
+function renderResult(d, asset, tf) {
+  // Signal
+  const sigClass = d.signal.toLowerCase().replace(' ', '-');
+  const sigEmoji = { 'STRONG BUY':'🚀','BUY':'📈','WAIT':'⏳','SELL':'📉','STRONG SELL':'🔻' };
+  document.getElementById('signalBadge').textContent = sigEmoji[d.signal] + ' ' + d.signal;
+  document.getElementById('signalBadge').className = 'signal-badge ' + sigClass;
+  document.getElementById('signalAsset').textContent = asset + ' · ' + tf;
+  document.getElementById('signalTrend').textContent = d.trend_label || d.trend_direction;
+  document.getElementById('signalDesc').textContent = d.trend_desc || '';
 
   // Score ring
-  const composite = Math.max(0, Math.min(100, d.composite_score || 50));
-  const circ = 251.2;
-  const offset = circ - (composite/100)*circ;
-  const circle = document.getElementById('scoreCircle');
-  const ringColor = composite >= 70 ? '#00e676' : composite >= 55 ? '#00d4ff' : composite >= 40 ? '#ff9100' : '#ff3d57';
+  const score = Math.max(0, Math.min(100, d.signal_score || 50));
+  const ring = document.getElementById('scoreRing');
+  const color = score >= 70 ? '#00e676' : score >= 50 ? '#00d4ff' : score >= 35 ? '#ff9100' : '#ff3d57';
   setTimeout(() => {
-    circle.style.strokeDashoffset = offset;
-    circle.style.stroke = ringColor;
-  }, 100);
-  document.getElementById('scoreRingVal').textContent = composite;
-
-  // Score bars
-  const bars = [
-    ['barTweet','numTweet', Math.max(0,Math.min(100,d.tweet_score||50))],
-    ['barTech','numTech', d.tech_score],
-    ['barPattern','numPattern', d.pattern_score],
-    ['barStruct','numStruct', d.struct_score],
-  ];
-  setTimeout(() => {
-    bars.forEach(([barId, numId, val]) => {
-      document.getElementById(barId).style.width = val + '%';
-      document.getElementById(numId).textContent = val;
-    });
+    ring.style.strokeDashoffset = 251.2 - (score / 100) * 251.2;
+    ring.style.stroke = color;
   }, 200);
-
-  // Sentiment gauge
-  const tweetScore = d.tweet_score || 50;
-  const gaugeAngle = ((tweetScore/100) * 180) - 90;
-  document.getElementById('gaugeNeedle').style.transform = `rotate(${gaugeAngle}deg)`;
-  document.getElementById('gaugeSentText').textContent = d.tweet_sentiment || '—';
-  document.getElementById('gaugeSentText').setAttribute('fill', tweetScore > 55 ? 'var(--green)' : tweetScore < 45 ? 'var(--red)' : 'var(--orange)');
-  document.getElementById('gaugeWrap').style.display = 'flex';
-
-  // MTF
-  const mtf = d.mtf_analysis || {};
-  const mtfGrid = document.getElementById('mtfResultGrid');
-  const trendColor = t => t === 'BULLISH' ? 'var(--green)' : t === 'BEARISH' ? 'var(--red)' : 'var(--orange)';
-  const trendArrow = t => t === 'BULLISH' ? '↗' : t === 'BEARISH' ? '↘' : '→';
-  mtfGrid.innerHTML = ['htf','mtf','ltf'].map(tf => `
-    <div class="mtf-result-card">
-      <div class="mtf-result-tf">${tf.toUpperCase()}</div>
-      <div class="mtf-result-trend" style="color:${trendColor(mtf[tf]?.trend)}">${trendArrow(mtf[tf]?.trend)} ${mtf[tf]?.trend||'—'}</div>
-      <div class="mtf-result-desc">${mtf[tf]?.desc||'—'}</div>
-    </div>
-  `).join('');
-
-  const confColor = { 'FULL ALIGN':'var(--green)', 'PARTIAL':'var(--orange)', 'CONFLICTING':'var(--red)' };
-  const confEl = document.getElementById('mtfAlignMsg');
-  confEl.textContent = `Confluence: ${mtf.confluence||'—'} — ${mtf.confluence_note||''}`;
-  confEl.style.background = 'rgba(0,0,0,0.2)';
-  confEl.style.color = confColor[mtf.confluence] || 'var(--text2)';
-  confEl.style.border = `1px solid ${confColor[mtf.confluence]||'var(--border)'}30`;
-
-  // Assets
-  const assetsData = d.assets || [];
-  document.getElementById('assetRow').innerHTML = assetsData.map(a => `
-    <div class="asset-item ${a.direction}">
-      <div class="asset-sym">${a.pair||a.symbol}</div>
-      <div class="asset-impact-val ${a.direction}">${a.impact}</div>
-      <div class="asset-reason">${a.reason}</div>
-      ${a.price_target && a.price_target !== 'N/A' ? `<div class="asset-conf">Target: ${a.price_target}</div>` : ''}
-      <div class="asset-conf">Confidence: ${a.confidence||0}%</div>
-    </div>
-  `).join('') || '<div style="color:var(--muted);font-family:var(--mono);font-size:11px;">Tidak ada data aset.</div>';
-
-  // Analysis texts
-  document.getElementById('tweetAnalysisText').textContent = d.tweet_analysis || '—';
-  document.getElementById('techAnalysisText').textContent = d.tech_analysis || '—';
-  document.getElementById('patternAnalysisText').textContent = d.pattern_analysis || '—';
-  document.getElementById('structAnalysisText').textContent = d.structure_analysis || '—';
-
-  // Risk
-  const riskVal = d.risk_level || 5;
-  const riskColor = d.risk_color || '#f0b429';
-  document.getElementById('riskLabel').textContent = `${d.risk_label||'—'} (${riskVal}/10)`;
-  document.getElementById('riskLabel').style.color = riskColor;
-  document.getElementById('riskFill').style.background = riskColor;
-  setTimeout(() => { document.getElementById('riskFill').style.width = (riskVal*10)+'%'; }, 300);
-  document.getElementById('riskScore').textContent = riskVal+'/10';
-  document.getElementById('riskScore').style.color = riskColor;
-
-  // Risk factors
-  const factors = d.risk_factors || [];
-  document.getElementById('riskFactors').innerHTML = factors.map(f =>
-    `<span style="background:rgba(255,61,87,0.08);border:1px solid rgba(255,61,87,0.2);border-radius:4px;padding:3px 10px;font-family:var(--mono);font-size:9px;color:var(--red);letter-spacing:0.5px;">${f}</span>`
-  ).join('');
+  document.getElementById('scoreVal').textContent = score;
 
   // Strategy
   const es = d.entry_strategy || {};
-  document.getElementById('strategyGrid').innerHTML = `
-    <div class="strat-item">
-      <div class="strat-label">Aksi</div>
-      <div class="strat-val entry" style="font-size:18px">${es.action||'—'}</div>
-    </div>
-    <div class="strat-item">
-      <div class="strat-label">Entry Zone</div>
-      <div class="strat-val entry">${es.entry_zone||'—'}</div>
-    </div>
-    <div class="strat-item">
-      <div class="strat-label">Take Profit 1</div>
-      <div class="strat-val tp">${es.take_profit_1||'—'}</div>
-    </div>
-    <div class="strat-item">
-      <div class="strat-label">Take Profit 2</div>
-      <div class="strat-val tp">${es.take_profit_2||'—'}</div>
-    </div>
-    <div class="strat-item">
-      <div class="strat-label">Stop Loss</div>
-      <div class="strat-val sl">${es.stop_loss||'—'}</div>
-    </div>
-    <div class="strat-item">
-      <div class="strat-label">Risk/Reward</div>
-      <div class="strat-val rr">${es.risk_reward||'—'}</div>
-    </div>
-    <div class="strat-item">
-      <div class="strat-label">Position Size</div>
-      <div class="strat-val" style="color:var(--purple)">${es.position_size||'—'}</div>
-    </div>
-    <div class="strat-item">
-      <div class="strat-label">Timing Entry</div>
-      <div class="strat-val" style="color:var(--text2);font-size:11px">${es.timing||'—'}</div>
-    </div>
+  document.getElementById('stratGrid').innerHTML = `
+    <div class="strat-item"><div class="strat-label">Aksi</div><div class="strat-val entry">${es.action||'—'}</div></div>
+    <div class="strat-item"><div class="strat-label">Entry Zone</div><div class="strat-val entry">${es.entry_zone||'—'}</div></div>
+    <div class="strat-item"><div class="strat-label">Take Profit</div><div class="strat-val tp">${es.take_profit||'—'}</div></div>
+    <div class="strat-item"><div class="strat-label">Stop Loss</div><div class="strat-val sl">${es.stop_loss||'—'}</div></div>
+    <div class="strat-item"><div class="strat-label">Risk/Reward</div><div class="strat-val rr">${es.risk_reward||'—'}</div></div>
+    <div class="strat-item"><div class="strat-label">Konfirmasi</div><div class="strat-val" style="color:var(--gold);font-size:11px">${es.confirmation||'—'}</div></div>
   `;
 
-  // Structure summary
-  const structs = d.structure_summary || [];
-  document.getElementById('structResultList').innerHTML = structs.map(s => `
-    <div class="struct-result-item">
-      <div class="struct-result-icon">${s.icon||'📌'}</div>
-      <div>
-        <div class="struct-result-label">${s.type||'—'} — ${s.direction||''}</div>
-        <div class="struct-result-desc">${s.desc||'—'}</div>
-      </div>
+  // Levels
+  const levels = d.levels || [];
+  document.getElementById('levelsList').innerHTML = levels.map(l => `
+    <div class="level-row">
+      <div class="level-type ${l.type.toLowerCase()}">${l.type === 'R' ? 'RESIST' : 'SUPPORT'}</div>
+      <div class="level-bar-wrap"><div class="level-bar ${l.type.toLowerCase()}" style="width:${l.strength_pct||60}%"></div></div>
+      <div class="level-price">${l.price}</div>
+      <div class="level-strength">${l.strength}</div>
     </div>
-  `).join('') || '<div style="color:var(--muted);font-family:var(--mono);font-size:11px;">Tidak ada struktur yang teridentifikasi.</div>';
+  `).join('');
+  setTimeout(() => {
+    document.querySelectorAll('.level-bar').forEach(b => { b.style.width = b.style.width; });
+  }, 100);
+
+  // Patterns
+  const pats = d.patterns || [];
+  document.getElementById('patternTags').innerHTML = pats.map(p =>
+    `<div class="ptag ${p.type}">${p.name}</div>`
+  ).join('') || '<div style="color:var(--muted);font-family:var(--mono);font-size:11px">Tidak terdeteksi</div>';
+  document.getElementById('patternDesc').textContent = pats.map(p => `• ${p.name}: ${p.note}`).join('\n');
+
+  // Momentum
+  const mom = d.momentum || {};
+  const rsiColor = (mom.rsi_est||50) >= 70 ? 'var(--red)' : (mom.rsi_est||50) <= 30 ? 'var(--green)' : 'var(--cyan)';
+  const macdColor = (mom.macd_label||'').includes('BULL') ? 'var(--green)' : (mom.macd_label||'').includes('BEAR') ? 'var(--red)' : 'var(--gold)';
+  document.getElementById('gaugeRow').innerHTML = `
+    <div class="gauge-item">
+      <div class="gauge-label">RSI <span>${mom.rsi_label||'—'} (${mom.rsi_est||'?'})</span></div>
+      <div class="gauge-track"><div class="gauge-fill" id="rsiBar" style="background:${rsiColor}"></div></div>
+      <div class="gauge-note">${mom.rsi_note||'—'}</div>
+    </div>
+    <div class="gauge-item">
+      <div class="gauge-label">MACD <span>${mom.macd_label||'—'}</span></div>
+      <div class="gauge-track"><div class="gauge-fill" id="macdBar" style="background:${macdColor}"></div></div>
+      <div class="gauge-note">${mom.macd_note||'—'}</div>
+    </div>
+    <div class="gauge-item">
+      <div class="gauge-label">VOLUME <span>${mom.volume_label||'—'}</span></div>
+      <div class="gauge-track"><div class="gauge-fill" id="volBar" style="background:var(--purple)"></div></div>
+      <div class="gauge-note">${mom.volume_note||'—'}</div>
+    </div>
+  `;
+  setTimeout(() => {
+    const rsiPct = mom.rsi_est || 50;
+    const macdPct = (mom.macd_label||'').includes('BULL') ? 70 : (mom.macd_label||'').includes('BEAR') ? 30 : 50;
+    const volPct = mom.volume_label === 'HIGH' ? 80 : mom.volume_label === 'LOW' ? 25 : 55;
+    const rsiBar = document.getElementById('rsiBar');
+    const macdBar = document.getElementById('macdBar');
+    const volBar = document.getElementById('volBar');
+    if(rsiBar) rsiBar.style.width = rsiPct + '%';
+    if(macdBar) macdBar.style.width = macdPct + '%';
+    if(volBar) volBar.style.width = volPct + '%';
+  }, 300);
+
+  // Structure
+  const struct = d.structure || {};
+  const tagMap = { HH:'hh', HL:'hl', LH:'lh', LL:'ll', BOS:'bos', CHoCH:'choch' };
+  document.getElementById('structTags').innerHTML = (struct.tags||[]).map(t =>
+    `<div class="stag ${tagMap[t]||'bos'}">${t}</div>`
+  ).join('');
+  document.getElementById('structDesc').textContent = struct.desc || '—';
+
+  // Risk
+  const risk = d.risk || {};
+  document.getElementById('riskNum').textContent = (risk.level||5) + '/10';
+  document.getElementById('riskNum').style.color = risk.color || 'var(--gold)';
+  document.getElementById('riskName').textContent = risk.label || '—';
+  document.getElementById('riskName').style.color = risk.color || 'var(--gold)';
+  document.getElementById('riskFill').style.background = risk.color || 'var(--gold)';
+  document.getElementById('riskDesc').textContent = risk.desc || '—';
+  setTimeout(() => {
+    document.getElementById('riskFill').style.width = ((risk.level||5) * 10) + '%';
+  }, 300);
 
   // Checklist
-  const checkIcons = { pass:'✓', fail:'✗', warn:'!' };
+  const icons = { pass:'✓', warn:'!', fail:'✗' };
   document.getElementById('checklist').innerHTML = (d.checklist||[]).map(c => `
     <div class="check-item">
-      <div class="check-icon ${c.status}">${checkIcons[c.status]||'?'}</div>
+      <div class="check-icon ${c.status}">${icons[c.status]||'?'}</div>
       <div class="check-text"><strong>${c.label}</strong> — ${c.note}</div>
     </div>
   `).join('');
 
   // Narrative
-  document.getElementById('aiNarrative').textContent = d.narrative || '—';
+  document.getElementById('narrativeText').textContent = d.narrative || '—';
 
-  // Vision
-  if (d.vision_analysis) {
-    document.getElementById('visionResultCard').style.display = 'block';
-    document.getElementById('visionAnalysisText').textContent = d.vision_analysis;
-  } else {
-    document.getElementById('visionResultCard').style.display = 'none';
-  }
-
-  updateTotalCount();
+  document.getElementById('resultSection').classList.add('show');
+  document.getElementById('resultSection').scrollIntoView({ behavior:'smooth', block:'start' });
 }
 
-// ═══════════════════════════════════════════════════════
-//  HISTORY
-// ═══════════════════════════════════════════════════════
-function saveHistory(tweet, result) {
-  historyData.unshift({
-    tweet: tweet.substring(0,70),
-    influencer: state.influencer,
-    asset: state.mainAsset,
+// ── HISTORY ──
+function saveHistory(result, asset, tf) {
+  history.unshift({
     signal: result.signal,
-    score: result.composite_score,
-    time: new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'}),
+    score: result.signal_score,
+    asset: asset,
+    tf: tf,
+    time: new Date().toLocaleString('id-ID', {day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit'}),
     full: result
   });
-  if (historyData.length > 20) historyData.pop();
-  try { localStorage.setItem('nexus_pro_history', JSON.stringify(historyData)); } catch(e) {}
+  if (history.length > 20) history.pop();
+  localStorage.setItem('nexus_history', JSON.stringify(history));
   renderHistory();
 }
 
 function renderHistory() {
-  const wrap = document.getElementById('historyWrap');
-  if (historyData.length === 0) { wrap.style.display = 'none'; return; }
-  wrap.style.display = 'block';
-  document.getElementById('historyItems').innerHTML = historyData.map((h,i) => `
+  if (history.length === 0) { document.getElementById('histSection').style.display = 'none'; return; }
+  document.getElementById('histSection').style.display = 'block';
+  document.getElementById('histList').innerHTML = history.map((h, i) => `
     <div class="hist-item" onclick="loadHistory(${i})">
-      <span class="hist-tweet">${h.influencer}: "${h.tweet}..."</span>
+      <div class="hist-sig ${(h.signal||'').toLowerCase().replace(' ','-')}">${h.signal}</div>
       <div class="hist-meta">
-        <span style="font-family:var(--mono);font-size:9px;color:var(--text3)">${h.asset}</span>
-        <span class="hist-signal ${(h.signal||'').toLowerCase().replace(' ','-')}">${h.signal}</span>
-        <span style="font-family:var(--mono);font-size:10px;color:var(--cyan)">${h.score}</span>
-        <span class="hist-time">${h.time}</span>
+        <div class="hist-asset">${h.asset} · ${h.tf}</div>
+        <div class="hist-time">${h.time}</div>
       </div>
+      <div class="hist-score">${h.score}</div>
     </div>
   `).join('');
 }
 
 function loadHistory(i) {
-  const h = historyData[i];
-  if (!h) return;
-  state.lastResult = h.full;
-  renderResult(h.full, []);
+  const h = history[i];
+  renderResult(h.full, h.asset, h.tf);
 }
 
 function clearHistory() {
-  historyData = [];
-  try { localStorage.removeItem('nexus_pro_history'); } catch(e) {}
+  history = [];
+  localStorage.removeItem('nexus_history');
   renderHistory();
-  updateTotalCount();
 }
 
-function updateTotalCount() {
-  document.getElementById('totalAnalysis').textContent = historyData.length;
-}
-
-// ═══════════════════════════════════════════════════════
-//  EXPORT
-// ═══════════════════════════════════════════════════════
-function exportReport() {
-  if (!state.lastResult) return;
-  const data = JSON.stringify({
-    timestamp: new Date().toISOString(),
-    asset: state.mainAsset,
-    influencer: state.influencer,
-    tweet: state.tweet,
-    result: state.lastResult
-  }, null, 2);
-  const blob = new Blob([data], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `nexus-pro-${state.mainAsset.replace('/','_')}-${Date.now()}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-function copyReport() {
-  if (!state.lastResult) return;
-  const d = state.lastResult;
-  const text = `NEXUS PRO REPORT — ${new Date().toLocaleString('id-ID')}
-Asset: ${state.mainAsset} | TF: ${state.tf}
-Signal: ${d.signal} | Score: ${d.composite_score}/100
-Risk: ${d.risk_label} (${d.risk_level}/10)
-Entry: ${d.entry_strategy?.entry_zone||'—'} | TP1: ${d.entry_strategy?.take_profit_1||'—'} | SL: ${d.entry_strategy?.stop_loss||'—'}
-R:R: ${d.entry_strategy?.risk_reward||'—'}
-Narrative: ${d.narrative}
-— NEXUS PRO AI Engine`;
-  navigator.clipboard.writeText(text).then(() => alert('✓ Ringkasan berhasil di-copy!'));
-}
-
+// ── UTILS ──
 function showError(msg) {
   const el = document.getElementById('errorBox');
-  el.textContent = msg;
-  el.classList.add('show');
-  el.scrollIntoView({ behavior: 'smooth' });
+  el.textContent = msg; el.classList.add('show');
+}
+function hideError() {
+  document.getElementById('errorBox').classList.remove('show');
 }
 
 // Init
 renderHistory();
-updateTotalCount();
 </script>
 </body>
 </html>
